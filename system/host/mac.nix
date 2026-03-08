@@ -264,16 +264,12 @@
     };
   };
 
-
   homebrew = {
     enable = true;
+    user = "mika";
     prefix = "/opt/homebrew";
-    taps = [
-      "nohajc/anylinuxfs"
-    ];
-    brews = [
-      "anylinuxfs"
-    ];
+    taps = [ ];
+    brews = [ ];
     casks = [ ];
     onActivation = {
       autoUpdate = true;
