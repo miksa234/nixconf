@@ -240,12 +240,13 @@
         alt-c = "exec-and-forget open -n /Users/mika/Applications/Firefox.app";
         alt-shift-w = "exec-and-forget open -n /Users/mika/Applications/Spotify.app";
         alt-shift-q = "close --quit-if-last-window";
+        alt-m = "exec-and-forget /Users/mika/Applications/kitty.app/Contents/MacOS/kitty neomutt";
+        alt-f = "fullscreen";
+
 
         # Workspace navigation
         alt-tab = "workspace-back-and-forth";
         alt-shift-tab = "move-workspace-to-monitor --wrap-around next";
-
-        alt-f = "fullscreen";
 
         # Mode
         alt-shift-semicolon = "mode service";
