@@ -49,6 +49,11 @@ in
         source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
         source ${pkgs.zsh-system-clipboard}/share/zsh/zsh-system-clipboard/zsh-system-clipboard.zsh
       '';
+    } // lib.optionalAttrs (isDarwin) {
+      "/Applications" = {
+        source = link "/Users/mika/Applications/Home Manager Apps/";
+        recursive = true;
+      };
     };
   } // lib.optionalAttrs (!isDarwin || standalone){
     homeDirectory = if isDarwin then "/Users/mika" else "/home/mika/";
