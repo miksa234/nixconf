@@ -49,7 +49,7 @@ with pkgs; {
   ];
 
   cli = [
-    pass
+    (pass.withExtensions (exts: [ exts.pass-otp ]))
     ripgrep
     fzf
     wget

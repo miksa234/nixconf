@@ -58,7 +58,6 @@
   networking.wireless.enable = true;
 
   # time/locale
-  time.timeZone = "Europe/Lisbon";
   i18n.defaultLocale = "en_US.UTF-8";
 
   # programs
@@ -94,6 +93,7 @@
 
   # services
   services = {
+    automatic-timezoned.enable = true;
     upower.enable = true;
     fwupd.enable = true;
     openssh.enable = true;
