@@ -14,7 +14,7 @@ os_rollback:
     sudo nixos-rebuild switch --flake --rollback
 
 hm:
-    home-manager switch -b backup --flake ./#{{user}}
+    home-manager switch -b backup --flake ./#{{user}} --impure
 
 gc:
     sudo nix-collect-garbage --delete-older-than 7d

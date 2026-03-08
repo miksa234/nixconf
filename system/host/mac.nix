@@ -126,7 +126,7 @@
         show-recents = false;
         showhidden = true;
         persistent-apps = [ ];
-        tilesize = 30;
+        tilesize = 50;
         wvous-bl-corner = 1;
         wvous-br-corner = 1;
         wvous-tl-corner = 1;
@@ -136,10 +136,11 @@
     keyboard = {
       enableKeyMapping = true;
       # Remap §± to ~
+      nonUS.remapTilde = true;
       userKeyMapping = [
         {
-          HIDKeyboardModifierMappingDst = 30064771125;
           HIDKeyboardModifierMappingSrc = 30064771172;
+          HIDKeyboardModifierMappingDst = 30064771125;
         }
       ];
     };

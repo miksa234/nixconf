@@ -169,8 +169,11 @@
       mika =
         let
           system = builtins.currentSystem;
-          pkgs   = nixpkgs.legacyPackages.${system};
-          isDarwin = builtins.currentSystem == "aarch64-darwin";
+          pkgs =
+            if system == darwinSystem
+            then pkgsDarwin
+            else pkgsLinux;
+          isDarwin = system == darwinSystem;
         in
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;

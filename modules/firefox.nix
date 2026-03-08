@@ -23,7 +23,7 @@
       frame = {
         id = 0;
         name = "frame";
-        isDefault = false;
+        isDefault = true;
         settings = {
           "browser.toolbars.bookmarks.visibility" = "always";
           "browser.download.start_downloads_in_tmp_dir" = false;
@@ -33,7 +33,7 @@
       mulmon = {
         id = 1;
         name = "mulmon";
-        isDefault = true;
+        isDefault = false;
         settings = {
           "layout.css.devPixelsPerPx" = 0.9;
           "browser.toolbars.bookmarks.visibility" = "always";

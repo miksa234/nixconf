@@ -50,8 +50,8 @@ in
         source ${pkgs.zsh-system-clipboard}/share/zsh/zsh-system-clipboard/zsh-system-clipboard.zsh
       '';
     };
-  } // lib.optionalAttrs (!isDarwin ){
-    homeDirectory = "/home/mika/";
+  } // lib.optionalAttrs (!isDarwin || standalone){
+    homeDirectory = if isDarwin then "/Users/mika" else "/home/mika/";
   };
 
   programs.kitty = lib.mkIf isDarwin {
@@ -71,11 +71,9 @@ in
       ../modules/mbsync_timer.nix
       ../modules/firefox.nix
     ]
-    ++ lib.optionals standalone [
-      ../modules/xdg.nix
-      ../modules/nix_settings.nix
-    ]
-    ++ lib.optional (!isDarwin) [ ../modules/theme.nix ];
+    ++ lib.optionals standalone [ ../modules/nix_settings.nix ]
+    ++ lib.optionals (!isDarwin) [ ../modules/theme.nix ]
+    ++ lib.optionals (!isDarwin && standalone)  [../modules/xdg.nix];
 
   xdg.configFile = let
     filteredDirs = builtins.filter (dir: dir != "systemd") configDirs;
