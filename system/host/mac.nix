@@ -89,11 +89,12 @@
       };
       NSGlobalDomain = {
         "com.apple.sound.beep.volume" = 0.000;
-        AppleInterfaceStyle = "Dark";
+        AppleInterfaceStyleSwitchesAutomatically = true;
         ApplePressAndHoldEnabled = false;
         AppleShowAllExtensions = true;
-        InitialKeyRepeat = 20;
-        KeyRepeat = 2;
+        AppleMetricUnits = 1;
+        InitialKeyRepeat = 30;
+        KeyRepeat = 3;
         NSAutomaticCapitalizationEnabled = false;
         NSAutomaticDashSubstitutionEnabled = false;
         NSAutomaticQuoteSubstitutionEnabled = false;
@@ -267,9 +268,8 @@
   homebrew = {
     enable = true;
     prefix = "/opt/homebrew";
-    brews = [
-      "fzf"
-      "ripgrep"
+    casks = [
+      "macfuse"
     ];
     onActivation = {
       autoUpdate = true;
