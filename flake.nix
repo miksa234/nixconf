@@ -46,7 +46,11 @@
     pkgsLinux    = nixpkgs.legacyPackages.${linuxSystem};
     pkgsDarwin   = nixpkgs.legacyPackages.${darwinSystem};
   in {
-    nixosConfigurations = {
+    nixosConfigurations =
+    let
+      isDarwin = false;
+    in
+    {
       nixos-frame =
         let
           hostName = "nixos-frame";
@@ -55,7 +59,7 @@
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit inputs hostName system;
+            inherit inputs hostName system isDarwin;
           };
           modules = [
             nixos-hardware.nixosModules.framework-13-7040-amd
@@ -68,7 +72,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = {
-                  inherit system inputs;
+                  inherit system inputs isDarwin;
                   standalone = false;
                 };
                 users.mika = import ./users/mika.nix;
@@ -85,7 +89,7 @@
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit inputs hostName system;
+            inherit inputs hostName system isDarwin;
           };
           modules = [
             home-manager.nixosModules.home-manager
@@ -96,7 +100,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = {
-                  inherit system inputs;
+                  inherit system inputs isDarwin;
                   standalone = false;
                 };
                 users.mika = import ./users/mika.nix;

@@ -7,8 +7,8 @@ let
 
   suckless = with pkgs; {
     dwm = dwm.overrideAttrs (old: {
-      src = fetchSucklessRepo "dwm" "sha256-Yp70Juv/5V23PY+55Qa1JCudtoygFHrcTuhFHQgWGWo=";
-      buildInputs = old.buildInputs ++ [ xorg.libxcb ];
+      src = fetchSucklessRepo "dwm" "sha256-fOYOM/FX5sTcy5DeYNYRfFj64RL7VcE13jCWYymhZ5w=";
+      buildInputs = old.buildInputs ++ [ libxcb ];
     });
 
     st = st.overrideAttrs (old: {
@@ -21,7 +21,7 @@ let
 
     slock = slock.overrideAttrs (old: {
       src = fetchSucklessRepo "slock" "sha256-3FWgl5IfiiCCXmM5b2eIEV6lAX4ioLjCdOp5vKrsjZg=";
-      buildInputs = old.buildInputs ++ (with xorg; [ libXinerama imlib2 libxft ]);
+      buildInputs = old.buildInputs ++ (with xorg; [ libxinerama imlib2 libxft ]);
     });
 
     dwmblocks = dwmblocks.overrideAttrs (old: {

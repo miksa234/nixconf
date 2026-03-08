@@ -2,7 +2,7 @@ hostname := `hostname`
 user := `whoami`
 
 os:
-    sudo nixos-rebuild switch --flake ./#{{hostname}} --impure
+    sudo nixos-rebuild switch --flake ./#{{hostname}} --impure --show-trace
 
 darwin:
     sudo darwin-rebuild switch --flake ./#{{hostname}} --impure

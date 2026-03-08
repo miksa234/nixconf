@@ -56,7 +56,7 @@ in
       };
     };
   } // lib.optionalAttrs (!isDarwin || standalone){
-    homeDirectory = if isDarwin then "/Users/mika" else "/home/mika/";
+    homeDirectory = if isDarwin then "/Users/mika" else "/home/mika";
   };
 
   programs.kitty = lib.mkIf isDarwin {

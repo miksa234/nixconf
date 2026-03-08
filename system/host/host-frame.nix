@@ -124,9 +124,9 @@
 
   };
 
-  systemd.sleep.extraConfig = ''
-    HibernateDelaySec=20m
-  '';
+  systemd.sleep.settings.Sleep = {
+    HibernateDelaySec = "20m";
+  };
 
   systemd.network.links."10-wlan0" = {
     matchConfig.MACAddress = "14:AC:60:29:82:AB";
