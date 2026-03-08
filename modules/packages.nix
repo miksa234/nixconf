@@ -89,6 +89,7 @@ with pkgs; {
     power-profiles-daemon
     pavucontrol
     pamixer
+    pulseaudio
   ] ++ (with suckless; [ dwm st dmenu slock dwmblocks ]);
 
   fonts = [
