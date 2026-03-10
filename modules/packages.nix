@@ -20,7 +20,7 @@ let
     });
 
     slock = slock.overrideAttrs (old: {
-      src = fetchSucklessRepo "slock" "sha256-3FWgl5IfiiCCXmM5b2eIEV6lAX4ioLjCdOp5vKrsjZg=";
+      src = fetchSucklessRepo "slock" "sha256-nj/GWQjJsQfQw4C+XJfXBBu9Txmn+WxnYlAHR07jvnQ=";
       buildInputs = old.buildInputs ++ (with xorg; [ libxinerama imlib2 libxft ]);
     });
 
