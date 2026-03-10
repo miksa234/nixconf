@@ -31,6 +31,7 @@ in
         cli
         media
         fileManagement
+        communication
         network
         office
         fonts

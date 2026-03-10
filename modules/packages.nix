@@ -7,7 +7,7 @@ let
 
   suckless = with pkgs; {
     dwm = dwm.overrideAttrs (old: {
-      src = fetchSucklessRepo "dwm" "sha256-fOYOM/FX5sTcy5DeYNYRfFj64RL7VcE13jCWYymhZ5w=";
+      src = fetchSucklessRepo "dwm" "sha256-npq3lOhCcAHJZZaAP6SlWs6y8g8+3ps3tYo2KQq0RaE=";
       buildInputs = old.buildInputs ++ [ libxcb ];
     });
 
@@ -64,6 +64,7 @@ with pkgs; {
     zbar
     pstree
     bat
+    gptfdisk
   ];
 
   network = [
@@ -105,6 +106,7 @@ with pkgs; {
     imagemagick
     mediainfo
     transmission_4
+    chromium
   ] ++ lib.optionals (!isDarwin) [
     vlc
     sxiv
@@ -170,6 +172,7 @@ with pkgs; {
     gcc
 
     # Languages and runtimes
+    libclang
     nodejs
     luarocks
     javaPackages.compiler.openjdk25

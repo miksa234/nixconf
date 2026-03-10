@@ -1,6 +1,8 @@
 {
   pkgs,
+  lib,
   hostName,
+  isDarwin,
   ...
 } :
 {
@@ -36,6 +38,14 @@
     };
   };
 
+  virtualisation.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+
   # boot
   boot = {
     loader = {
@@ -50,6 +60,9 @@
       "amd_iommu=on"
       "iommu=pt"
       "rtc_cmos.use_acpi_alarm=1"
+      "mem_sleep_default=s2idle"
+      "amdgpu.dcdebugmask=0x10"
+      "pcie_aspm=off"
     ];
   };
 
@@ -80,7 +93,7 @@
     users = {
       mika = {
         isNormalUser = true;
-        extraGroups = [ "wheel" ];
+        extraGroups = [ "wheel" "docker" ];
         initialPassword = "123";
         shell = pkgs.zsh;
       };
@@ -91,37 +104,54 @@
   };
   security.sudo.wheelNeedsPassword = false;
 
+  powerManagement.powertop.enable = true;
+
   # services
   services = {
     automatic-timezoned.enable = true;
     upower.enable = true;
     fwupd.enable = true;
     openssh.enable = true;
-    power-profiles-daemon.enable = true;
-
+    tlp.enable = false;
+    power-profiles-daemon.enable = false;
+    auto-cpufreq = {
+      enable = true;
+      settings = {
+        battery = {
+          governor = "powersave";
+          turbo = "never";
+        };
+        charger = {
+          governor = "performance";
+          turbo = "auto";
+        };
+      };
+    };
     pipewire = {
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
     };
-
     xserver = {
       enable = true;
       displayManager.startx = {
           enable = true;
       };
     };
-
     getty.autologinUser = "mika";
-
     logind.settings.Login = {
       SleepOperation = "suspend-then-hibernate";
       HandlePowerKey = "suspend-then-hibernate";
       HandleLidSwitch = "suspend-then-hibernate";
       HandlePowerKeyLongPress = "poweroff";
     };
-
+  } // lib.optionalAttrs (!isDarwin) {
+    gnome.gnome-keyring.enable = true;
+    libinput = {
+      enable = true;
+      touchpad.naturalScrolling = false;
+    };
   };
 
   systemd.sleep.settings.Sleep = {
@@ -135,6 +165,7 @@
 
   # hardware
   hardware.bluetooth.enable = true;
+  hardware.sensor.iio.enable = false; # disable light sensors
   security.rtkit.enable = true;
 
   # packages
