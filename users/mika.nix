@@ -41,10 +41,14 @@ in
     );
 
     file = {
-      ".zshenv".source = link "${dotfiles}/.zshenv";
+      ".zshenv" = {
+        source = link "${dotfiles}/.zshenv";
+        force = true;
+      };
       ".local" = {
         source = link "${dotfiles}/.local";
         recursive = true;
+        force = true;
       };
       ".config/nix-zsh-plugins.zsh".text = ''
         source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
@@ -54,6 +58,7 @@ in
       "/Users/mika/Applications" = {
         source = link "/Users/mika/Applications/Home Manager Apps/";
         recursive = true;
+        force = true;
       };
     };
   } // lib.optionalAttrs (!isDarwin || standalone){
@@ -88,6 +93,7 @@ in
     lib.genAttrs filteredDirs (dir: {
       source = link "${dotfiles}/.config/${dir}";
       recursive = true;
+      force = true;
     });
 
 }

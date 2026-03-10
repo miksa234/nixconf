@@ -170,14 +170,13 @@ with pkgs; {
     cmake
     gnumake
     gcc
-    npm
+    nodejs_25
     pnpm
 
     # Languages and runtimes
     libclang
-    nodejs
     luarocks
-    javaPackages.compiler.openjdk25
+    javaPackages.compiler.openjdk17
     lua5_1
     go
     ruby

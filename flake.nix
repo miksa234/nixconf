@@ -154,6 +154,7 @@
             ./system/hardware/vm.nix
             {
               home-manager = {
+                backupFileExtension = true;
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = {
@@ -185,6 +186,7 @@
             ./system/host/mac.nix
             {
               home-manager = {
+                backupFileExtension = true;
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = {

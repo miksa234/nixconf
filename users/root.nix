@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   isDarwin ? false,
   ...
@@ -25,6 +24,7 @@ in {
           mkDotfileLink = path: {
             source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
             recursive = true;
+            force = true;
           };
         in {
           # zsh no plugins
