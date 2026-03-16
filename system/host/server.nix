@@ -2,13 +2,12 @@
   pkgs,
   hostName,
   ...
-} :
+}:
 {
-  imports =
-    [
-      ../../users/root.nix
-      ../../modules/nix_settings.nix
-    ];
+  imports = [
+    ../../users/root.nix
+    ../../modules/nix_settings.nix
+  ];
 
   system.stateVersion = "25.11";
 
@@ -29,7 +28,11 @@
         "-vga virtio"
       ];
       forwardPorts = [
-        { from = "host"; host.port = 2222; guest.port = 61745; }
+        {
+          from = "host";
+          host.port = 2222;
+          guest.port = 61745;
+        }
       ];
     };
   };
@@ -123,4 +126,3 @@
     terminus_font
   ];
 }
-

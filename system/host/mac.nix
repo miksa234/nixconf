@@ -1,5 +1,4 @@
 {
-  lib,
   pkgs,
   hostName,
   systemName,
@@ -235,14 +234,12 @@
         alt-shift-8 = "move-node-to-workspace 8";
         alt-shift-9 = "move-node-to-workspace 9";
 
-
         alt-enter = "exec-and-forget open -n /Users/mika/Applications/kitty.app";
         alt-c = "exec-and-forget open -n /Users/mika/Applications/Firefox.app";
         alt-shift-w = "exec-and-forget open -n /Users/mika/Applications/Spotify.app";
         alt-shift-q = "close --quit-if-last-window";
         alt-m = "exec-and-forget /Users/mika/Applications/kitty.app/Contents/MacOS/kitty neomutt";
         alt-f = "fullscreen";
-
 
         # Workspace navigation
         alt-tab = "workspace-back-and-forth";
@@ -253,14 +250,38 @@
       };
 
       mode.service.binding = {
-        esc = [ "reload-config" "mode main" ];
-        r = [ "flatten-workspace-tree" "mode main" ];
-        f = [ "layout floating tiling" "mode main" ];
-        backspace = [ "close-all-windows-but-current" "mode main" ];
-        alt-shift-h = [ "join-with left" "mode main" ];
-        alt-shift-j = [ "join-with down" "mode main" ];
-        alt-shift-k = [ "join-with up" "mode main" ];
-        alt-shift-l = [ "join-with right" "mode main" ];
+        esc = [
+          "reload-config"
+          "mode main"
+        ];
+        r = [
+          "flatten-workspace-tree"
+          "mode main"
+        ];
+        f = [
+          "layout floating tiling"
+          "mode main"
+        ];
+        backspace = [
+          "close-all-windows-but-current"
+          "mode main"
+        ];
+        alt-shift-h = [
+          "join-with left"
+          "mode main"
+        ];
+        alt-shift-j = [
+          "join-with down"
+          "mode main"
+        ];
+        alt-shift-k = [
+          "join-with up"
+          "mode main"
+        ];
+        alt-shift-l = [
+          "join-with right"
+          "mode main"
+        ];
       };
     };
   };

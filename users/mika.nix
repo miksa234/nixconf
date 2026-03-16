@@ -15,17 +15,20 @@ let
   configDirs = builtins.attrNames (builtins.readDir "${dotfiles}/.config");
 in
 {
-  nixpkgs = if standalone
-  then {
-    config.allowUnfree = true;
-  } else
-    {};
+  nixpkgs =
+    if standalone then
+      {
+        config.allowUnfree = true;
+      }
+    else
+      { };
 
   home = {
     username = "mika";
     stateVersion = if isDarwin then "25.05" else "25.11";
     packages = lib.flatten (
-      with packageSets; [
+      with packageSets;
+      [
         system
         shell
         cli
@@ -37,7 +40,8 @@ in
         fonts
         email
         development
-      ]  ++ lib.optionals (!isDarwin) [ xorg ]
+      ]
+      ++ lib.optionals (!isDarwin) [ xorg ]
     );
 
     file = {
@@ -54,14 +58,16 @@ in
         source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
         source ${pkgs.zsh-system-clipboard}/share/zsh/zsh-system-clipboard/zsh-system-clipboard.zsh
       '';
-    } // lib.optionalAttrs (isDarwin) {
+    }
+    // lib.optionalAttrs (isDarwin) {
       "/Users/mika/Applications" = {
         source = link "/Users/mika/Applications/Home Manager Apps/";
         recursive = true;
         force = true;
       };
     };
-  } // lib.optionalAttrs (!isDarwin || standalone){
+  }
+  // lib.optionalAttrs (!isDarwin || standalone) {
     homeDirectory = if isDarwin then "/Users/mika" else "/home/mika";
   };
 
@@ -78,18 +84,18 @@ in
     };
   };
 
-  imports =
-    [
-      ../modules/mbsync_timer.nix
-      ../modules/firefox.nix
-    ]
-    ++ lib.optionals standalone [ ../modules/nix_settings.nix ]
-    ++ lib.optionals (!isDarwin) [ ../modules/theme.nix ]
-    ++ lib.optionals (!isDarwin && standalone)  [../modules/xdg.nix];
+  imports = [
+    ../modules/mbsync_timer.nix
+    ../modules/firefox.nix
+  ]
+  ++ lib.optionals standalone [ ../modules/nix_settings.nix ]
+  ++ lib.optionals (!isDarwin) [ ../modules/theme.nix ]
+  ++ lib.optionals (!isDarwin && standalone) [ ../modules/xdg.nix ];
 
-  xdg.configFile = let
-    filteredDirs = builtins.filter (dir: dir != "systemd") configDirs;
-  in
+  xdg.configFile =
+    let
+      filteredDirs = builtins.filter (dir: dir != "systemd") configDirs;
+    in
     lib.genAttrs filteredDirs (dir: {
       source = link "${dotfiles}/.config/${dir}";
       recursive = true;
@@ -97,5 +103,3 @@ in
     });
 
 }
-
-

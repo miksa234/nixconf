@@ -4,14 +4,13 @@
   hostName,
   isDarwin,
   ...
-} :
+}:
 {
-  imports =
-    [
-      ../../users/root.nix
-      ../../modules/nix_settings.nix
-      ../../modules/nm.nix
-    ];
+  imports = [
+    ../../users/root.nix
+    ../../modules/nix_settings.nix
+    ../../modules/nm.nix
+  ];
 
   sops.defaultSopsFile = ../../secrets.yaml;
   sops.defaultSopsFormat = "yaml";
@@ -93,7 +92,10 @@
     users = {
       mika = {
         isNormalUser = true;
-        extraGroups = [ "wheel" "docker" ];
+        extraGroups = [
+          "wheel"
+          "docker"
+        ];
         initialPassword = "123";
         shell = pkgs.zsh;
       };
@@ -127,7 +129,7 @@
         Option "Xauth" "$XAUTHORITY"
       '';
       displayManager.startx = {
-          enable = true;
+        enable = true;
       };
     };
     getty.autologinUser = "mika";
@@ -137,7 +139,8 @@
       HandleLidSwitch = "suspend-then-hibernate";
       HandlePowerKeyLongPress = "poweroff";
     };
-  } // lib.optionalAttrs (!isDarwin) {
+  }
+  // lib.optionalAttrs (!isDarwin) {
     gnome.gnome-keyring.enable = true;
     libinput = {
       enable = true;
@@ -190,4 +193,3 @@
   ];
   fonts.fontconfig.useEmbeddedBitmaps = true;
 }
-
