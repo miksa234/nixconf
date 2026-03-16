@@ -67,12 +67,14 @@
   # netowrk
   networking.hostName = "${hostName}";
   networking.wireless.enable = true;
+  networking.firewall.enable = false;
 
   # time/locale
   i18n.defaultLocale = "en_US.UTF-8";
 
   # programs
   programs = {
+    nix-ld.enable = true;
     zsh.enable = true;
     dconf.enable = true;
     gnupg.agent = {
@@ -107,6 +109,7 @@
   # services
   services = {
     automatic-timezoned.enable = true;
+    udisks2.enable = true;
     upower.enable = true;
     fwupd.enable = true;
     openssh.enable = true;
@@ -120,6 +123,9 @@
     };
     xserver = {
       enable = true;
+      serverFlagsSection = ''
+        Option "Xauth" "$XAUTHORITY"
+      '';
       displayManager.startx = {
           enable = true;
       };
