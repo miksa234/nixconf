@@ -27,197 +27,215 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs_stable,
-    nixpkgs,
-    nix-darwin,
-    disko,
-    home-manager,
-    nixos-hardware,
-    sops-nix,
-    betterfox,
-    ...
-  } @ inputs:
-  let
-    linuxSystem  = "x86_64-linux";
-    darwinSystem = "aarch64-darwin";
-
-    pkgsLinux    = nixpkgs.legacyPackages.${linuxSystem};
-    pkgsDarwin   = nixpkgs.legacyPackages.${darwinSystem};
-  in {
-    nixosConfigurations =
+  outputs =
+    {
+      self,
+      nixpkgs_stable,
+      nixpkgs,
+      nix-darwin,
+      disko,
+      home-manager,
+      nixos-hardware,
+      sops-nix,
+      betterfox,
+      ...
+    }@inputs:
     let
-      isDarwin = false;
+      linuxSystem = "x86_64-linux";
+      darwinSystem = "aarch64-darwin";
+
+      pkgsLinux = nixpkgs.legacyPackages.${linuxSystem};
+      pkgsDarwin = nixpkgs.legacyPackages.${darwinSystem};
     in
     {
-      frame =
+      nixosConfigurations =
         let
-          hostName = "frame";
-          system   = linuxSystem;
+          isDarwin = false;
         in
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs hostName system isDarwin;
-          };
-          modules = [
-            nixos-hardware.nixosModules.framework-13-7040-amd
-            home-manager.nixosModules.home-manager
-            sops-nix.nixosModules.sops
-            ./system/host/frame.nix
-            ./system/hardware/frame.nix
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = {
-                  inherit system inputs isDarwin;
-                  standalone = false;
-                };
-                users.mika = import ./users/mika.nix;
+        {
+          frame =
+            let
+              hostName = "frame";
+              system = linuxSystem;
+            in
+            nixpkgs.lib.nixosSystem {
+              inherit system;
+              specialArgs = {
+                inherit
+                  inputs
+                  hostName
+                  system
+                  isDarwin
+                  ;
               };
-            }
-          ];
-        };
-      nixos-frame =
-        let
-          hostName = "nixos-frame";
-          system   = linuxSystem;
-        in
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs hostName system isDarwin;
-          };
-          modules = [
-            nixos-hardware.nixosModules.framework-13-7040-amd
-            home-manager.nixosModules.home-manager
-            sops-nix.nixosModules.sops
-            ./system/host/frame.nix
-            ./system/hardware/frame-unencrypted.nix
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = {
-                  inherit system inputs isDarwin;
-                  standalone = false;
-                };
-                users.mika = import ./users/mika.nix;
+              modules = [
+                nixos-hardware.nixosModules.framework-13-7040-amd
+                home-manager.nixosModules.home-manager
+                sops-nix.nixosModules.sops
+                ./system/host/frame.nix
+                ./system/hardware/frame.nix
+                {
+                  home-manager = {
+                    useGlobalPkgs = true;
+                    useUserPackages = true;
+                    extraSpecialArgs = {
+                      inherit system inputs isDarwin;
+                      standalone = false;
+                    };
+                    users.mika = import ./users/mika.nix;
+                  };
+                }
+              ];
+            };
+          nixos-frame =
+            let
+              hostName = "nixos-frame";
+              system = linuxSystem;
+            in
+            nixpkgs.lib.nixosSystem {
+              inherit system;
+              specialArgs = {
+                inherit
+                  inputs
+                  hostName
+                  system
+                  isDarwin
+                  ;
               };
-            }
-          ];
+              modules = [
+                nixos-hardware.nixosModules.framework-13-7040-amd
+                home-manager.nixosModules.home-manager
+                sops-nix.nixosModules.sops
+                ./system/host/frame.nix
+                ./system/hardware/frame-unencrypted.nix
+                {
+                  home-manager = {
+                    useGlobalPkgs = true;
+                    useUserPackages = true;
+                    extraSpecialArgs = {
+                      inherit system inputs isDarwin;
+                      standalone = false;
+                    };
+                    users.mika = import ./users/mika.nix;
+                  };
+                }
+              ];
+            };
+
+          nixos-vm =
+            let
+              hostName = "nixos-vm";
+              system = linuxSystem;
+            in
+            nixpkgs.lib.nixosSystem {
+              inherit system;
+              specialArgs = {
+                inherit
+                  inputs
+                  hostName
+                  system
+                  isDarwin
+                  ;
+              };
+              modules = [
+                home-manager.nixosModules.home-manager
+                ./system/host/frame.nix
+                ./system/hardware/vm.nix
+                {
+                  home-manager = {
+                    useGlobalPkgs = true;
+                    useUserPackages = true;
+                    extraSpecialArgs = {
+                      inherit system inputs isDarwin;
+                      standalone = false;
+                    };
+                    users.mika = import ./users/mika.nix;
+                  };
+                }
+              ];
+            };
+
+          nixos-server =
+            let
+              hostName = "nixos-server";
+              system = linuxSystem;
+            in
+            nixpkgs_stable.lib.nixosSystem {
+              inherit system;
+              specialArgs = {
+                inherit inputs hostName system;
+              };
+              modules = [
+                home-manager.nixosModules.home-manager
+                ./system/host/server.nix
+                ./system/hardware/vm.nix
+                {
+                  home-manager = {
+                    backupFileExtension = true;
+                    useGlobalPkgs = true;
+                    useUserPackages = true;
+                    extraSpecialArgs = {
+                      inherit system inputs;
+                      standalone = false;
+                    };
+                    users.r2d2 = import ./users/r2d2.nix;
+                  };
+                }
+              ];
+            };
         };
 
-      nixos-vm =
-        let
-          hostName = "nixos-vm";
-          system   = linuxSystem;
-        in
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs hostName system isDarwin;
-          };
-          modules = [
-            home-manager.nixosModules.home-manager
-            ./system/host/frame.nix
-            ./system/hardware/vm.nix
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = {
-                  inherit system inputs isDarwin;
-                  standalone = false;
+      darwinConfigurations = {
+        mac =
+          let
+            hostName = "mac";
+            systemName = darwinSystem;
+            system = darwinSystem;
+            isDarwin = true;
+          in
+          nix-darwin.lib.darwinSystem {
+            specialArgs = {
+              inherit
+                hostName
+                systemName
+                inputs
+                isDarwin
+                ;
+            };
+            modules = [
+              home-manager.darwinModules.home-manager
+              sops-nix.darwinModules.sops
+              ./system/host/mac.nix
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  extraSpecialArgs = {
+                    inherit system inputs isDarwin;
+                    standalone = false;
+                  };
+                  users.mika = import ./users/mika.nix;
                 };
-                users.mika = import ./users/mika.nix;
-              };
-            }
-          ];
-        };
+              }
+            ];
+          };
+      };
 
-      nixos-server =
-        let
-          hostName = "nixos-server";
-          system   = linuxSystem;
-        in
-        nixpkgs_stable.lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs hostName system;
+      homeConfigurations = {
+        mika =
+          let
+            system = builtins.currentSystem;
+            pkgs = if system == darwinSystem then pkgsDarwin else pkgsLinux;
+            isDarwin = system == darwinSystem;
+          in
+          home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules = [ ./users/mika.nix ];
+            extraSpecialArgs = {
+              inherit system inputs isDarwin;
+              standalone = true;
+            };
           };
-          modules = [
-            home-manager.nixosModules.home-manager
-            ./system/host/server.nix
-            ./system/hardware/vm.nix
-            {
-              home-manager = {
-                backupFileExtension = true;
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = {
-                  inherit system inputs;
-                  standalone = false;
-                };
-                users.r2d2 = import ./users/r2d2.nix;
-              };
-            }
-          ];
-        };
+      };
     };
-
-    darwinConfigurations = {
-      mac =
-        let
-          hostName = "mac";
-          systemName   = darwinSystem;
-          system = darwinSystem;
-          isDarwin = true;
-        in
-        nix-darwin.lib.darwinSystem {
-          specialArgs = {
-            inherit hostName systemName inputs isDarwin;
-          };
-          modules = [
-            home-manager.darwinModules.home-manager
-            sops-nix.darwinModules.sops
-            ./system/host/mac.nix
-            {
-              home-manager = {
-                backupFileExtension = true;
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = {
-                  inherit system inputs isDarwin;
-                  standalone = false;
-                };
-                users.mika = import ./users/mika.nix;
-              };
-            }
-          ];
-        };
-    };
-
-    homeConfigurations = {
-      mika =
-        let
-          system = builtins.currentSystem;
-          pkgs =
-            if system == darwinSystem
-            then pkgsDarwin
-            else pkgsLinux;
-          isDarwin = system == darwinSystem;
-        in
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [ ./users/mika.nix ];
-          extraSpecialArgs = {
-            inherit system inputs isDarwin;
-            standalone = true;
-          };
-        };
-    };
-  };
 }
