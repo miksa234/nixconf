@@ -182,7 +182,6 @@ with pkgs;
     python313Packages.tiktoken
     luajitPackages.jsregexp
 
-
     # Language servers
     nil
     marksman
@@ -191,7 +190,6 @@ with pkgs;
     cmake
     gnumake
     gcc
-    nodejs_25
     pnpm
 
     # Languages and runtimes
