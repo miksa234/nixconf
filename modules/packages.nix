@@ -66,7 +66,6 @@ with pkgs;
     fd
     zip
     unzip
-    rsync
     bzip2
     killall
     zbar
@@ -96,6 +95,7 @@ with pkgs;
     xcompmgr
     xdotool
     xkblayout-state
+    rsync
     devour
     power-profiles-daemon
     pavucontrol
@@ -104,6 +104,8 @@ with pkgs;
     scrot
     cryptsetup
     chromium
+    pnpm
+    nodejs_25
   ]
   ++ (with suckless; [
     dwm
@@ -181,7 +183,6 @@ with pkgs;
     tree-sitter
     python313Packages.tiktoken
     luajitPackages.jsregexp
-    nodejs_24
 
     # Language servers
     nil
@@ -191,7 +192,6 @@ with pkgs;
     cmake
     gnumake
     gcc
-    pnpm
 
     # Languages and runtimes
     luarocks

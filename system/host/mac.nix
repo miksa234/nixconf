@@ -160,6 +160,9 @@
     util-linux
     pstree
     wireguard-tools
+    cocoapods
+    openrsync
+    fastlane
   ];
 
   services.aerospace = {
