@@ -105,7 +105,6 @@ with pkgs;
     cryptsetup
     chromium
     pnpm
-    nodejs_25
   ]
   ++ (with suckless; [
     dwm
@@ -187,6 +186,7 @@ with pkgs;
     # Language servers
     nil
     marksman
+    nodejs
 
     # Build tools
     cmake
