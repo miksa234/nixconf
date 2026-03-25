@@ -115,9 +115,13 @@ in
     ../modules/mbsync_timer.nix
     ../modules/firefox.nix
   ]
-  ++ lib.optionals standalone [ ../modules/nix_settings.nix ]
-  ++ lib.optionals (!isDarwin) [ ../modules/theme.nix ]
-  ++ lib.optionals (!isDarwin && standalone) [ ../modules/xdg.nix ];
+  ++ lib.optionals (!isDarwin) [
+    ../modules/theme.nix
+    ../modules/xdg.nix
+  ]
+  ++ lib.optionals standalone [
+    ../modules/nix_settings.nix
+  ];
 
   xdg.configFile =
     let
