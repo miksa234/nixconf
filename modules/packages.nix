@@ -56,6 +56,14 @@ with pkgs;
     neovim
   ];
 
+  wayland = [
+    alacritty
+    swaybg
+    swaylock
+    xwayland-satellite
+    fuzzel
+  ];
+
   cli = [
     (pass.withExtensions (exts: [ exts.pass-otp ]))
     ripgrep

@@ -40,6 +40,7 @@ in
         fonts
         email
         development
+        wayland
       ]
       ++ lib.optionals (!isDarwin) [ xorg ]
     );
@@ -74,6 +75,20 @@ in
       background_opacity = 0.93;
       confirm_os_window_close = 0;
       touch_scroll_multiplier = 1.0;
+    };
+  };
+
+  programs.niri = {
+    enable = true;
+    settings = {
+      binds = {
+        "Mod+Return".action.spawn = "alacritty";
+      };
+      prefer-no-csd = true;
+      layout = {
+        focus-ring.enable = true;
+        border.enable = false;
+      };
     };
   };
 
