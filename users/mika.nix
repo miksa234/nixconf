@@ -27,7 +27,7 @@ in
 
   home = {
     username = "mika";
-    stateVersion = if isDarwin then "25.05" else "25.11";
+    stateVersion = if isDarwin then "25.05" else "26.05";
     packages = lib.flatten (
       with packageSets;
       [

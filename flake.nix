@@ -10,7 +10,7 @@
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
-    niri.url = "github:sobidoo/niri-flake";
+    niri.url = "github:sodiboo/niri-flake";
 
     betterfox.url = "github:HeitorAugustoLN/betterfox-nix";
 
@@ -174,7 +174,6 @@
                 ./machines/server/hardware.nix
                 {
                   home-manager = {
-                    backupFileExtension = true;
                     useGlobalPkgs = true;
                     useUserPackages = true;
                     extraSpecialArgs = {

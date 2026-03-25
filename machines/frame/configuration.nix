@@ -17,7 +17,7 @@
   sops.defaultSopsFormat = "yaml";
   sops.age.keyFile = "/home/mika/.config/sops/age/keys.txt";
 
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 
   # vm
   virtualisation.vmVariant = {
