@@ -78,6 +78,7 @@ in
     ../modules/xdg.nix
     ../modules/mbsync_timer.nix
     ../modules/niri.nix
+    ../modules/alacitty.nix
   ]
   ++ lib.optionals (standalone) [
     ../modules/nix_settings.nix

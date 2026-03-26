@@ -15,7 +15,7 @@
     package = pkgs.niri;
     settings =
       let
-        noctaliaPkg = inputs.noctalia.packages.${pkgs.system}.default;
+        noctaliaPkg = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
         noctaliaExe = lib.getExe noctaliaPkg;
       in
       {
@@ -71,8 +71,8 @@
 
           "Mod+Ctrl+H".action.set-column-width = "-5%";
           "Mod+Ctrl+L".action.set-column-width = "+5%";
-          "Mod+Ctrl+J".action.set-window-height = "-5%";
-          "Mod+Ctrl+K".action.set-window-height = "+5%";
+          "Mod+Ctrl+K".action.set-window-height = "-5%";
+          "Mod+Ctrl+J".action.set-window-height = "+5%";
 
           "Shift+Alt+C".action.spawn-sh = "${lib.getExe pkgs.grim} -l 0 - | ${pkgs.wl-clipboard}/bin/wl-copy";
 
@@ -133,6 +133,32 @@
             ];
           }
         ];
+
+        outputs = {
+          "BOE 0x0BCA Unknown".enable = false;
+          "PNP(BNQ) BenQ GL2760 H3E04203019" = {
+            enable = true;
+            mode = {
+              width = 1920;
+              height = 1080;
+            };
+            position = {
+              x = 0;
+              y = 0;
+            };
+          };
+          "PNP(BNQ) BenQ GL2760 SCF04101019" = {
+            enable = true;
+            mode = {
+              width = 1920;
+              height = 1080;
+            };
+            position = {
+              x = 1920;
+              y = 0;
+            };
+          };
+        };
 
         input = {
           focus-follows-mouse.enable = true;

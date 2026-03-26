@@ -27,7 +27,7 @@
           family = "Terminus";
           style = "Bold";
         };
-        size = 12;
+        size = 14;
       };
 
       colors = {
@@ -66,13 +66,13 @@
 
       bell = {
         duration = 0;
-      }; # st bellvolume=0 (closest match)
+      };
 
       cursor = {
         style = {
           shape = "Block";
         };
-        thickness = 0.2; # st cursorthickness=2px; approximate (Alacritty uses fraction)
+        thickness = 0.2;
       };
 
       selection = {
@@ -82,6 +82,41 @@
       mouse = {
         hide_when_typing = false;
       };
+
+      keyboard.bindings = [
+        # Scrollback
+        {
+          key = "K";
+          mods = "Alt";
+          action = "ScrollLineUp";
+        }
+        {
+          key = "L";
+          mods = "Alt";
+          action = "ScrollLineDown";
+        }
+        {
+          key = "U";
+          mods = "Alt";
+          action = "ScrollPageUp";
+        }
+        {
+          key = "D";
+          mods = "Alt";
+          action = "ScrollPageDown";
+        }
+
+        {
+          key = "C";
+          mods = "Alt";
+          action = "Copy";
+        }
+        {
+          key = "V";
+          mods = "Alt";
+          action = "Paste";
+        }
+      ];
     };
   };
 }
