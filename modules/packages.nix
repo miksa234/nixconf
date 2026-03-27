@@ -84,6 +84,7 @@ with pkgs;
     bat
     gptfdisk
     qrencode
+    jq
   ];
 
   network = [
