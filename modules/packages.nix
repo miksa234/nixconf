@@ -61,6 +61,7 @@ with pkgs;
     swaylock
     xwayland-satellite
     fuzzel
+    dmenu-wayland
     wl-clipboard
     grim
   ];
@@ -132,6 +133,7 @@ with pkgs;
     spotify
     inkscape
     imagemagick
+    ghostscript
     pandoc
     mediainfo
     transmission_4

@@ -27,7 +27,7 @@
           family = "Terminus";
           style = "Bold";
         };
-        size = 20;
+        size = 14;
       };
 
       colors = {
@@ -86,23 +86,23 @@
       keyboard.bindings = [
         # Scrollback
         {
-          key = "K";
+          key = "U";
           mods = "Alt";
           action = "ScrollLineUp";
         }
         {
-          key = "L";
+          key = "D";
           mods = "Alt";
           action = "ScrollLineDown";
         }
         {
           key = "U";
-          mods = "Alt";
+          mods = "Alt|Shift";
           action = "ScrollPageUp";
         }
         {
           key = "D";
-          mods = "Alt";
+          mods = "Alt|Shift";
           action = "ScrollPageDown";
         }
 

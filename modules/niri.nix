@@ -16,13 +16,31 @@
     settings =
       let
         noctaliaPkg = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
-        noctaliaExe = lib.getExe noctaliaPkg;
+        noctaliaCmd = lib.getExe noctaliaPkg;
+        terminalCmd = lib.getExe pkgs.alacritty;
       in
       {
         prefer-no-csd = true;
+
+        window-rules = [
+          {
+            matches = [ { app-id = "spotify"; } ];
+            open-on-workspace = "9";
+          }
+        ];
         binds = {
-          "Mod+Return".action.spawn = "alacritty";
+          "Mod+Return".action.spawn = "${terminalCmd}";
           "Mod+C".action.spawn = "firefox";
+          "Mod+D".action.spawn = "dmenu-wl_run";
+          "Mod+P".action.spawn = "passmenu-otp";
+          "Mod+B".action.spawn = "dmenu-bluetooth";
+          "Mod+Alt+S".action.spawn = "swaylock";
+          "Mod+W".action.spawn = "spotify";
+          "Mod+M".action.spawn = "TZ=Europe/Berlin ${terminalCmd} -e neomutt";
+          "Mod+Shift+P".action.spawn = "pavucontrol";
+          "Mod+Shift+B".action.spawn = "nautilus";
+          "Mod+Shift+W".action.spawn = "${terminalCmd} -e nmtui";
+          "Mod+Shift+R".action.spawn-sh = "background";
 
           "Mod+Shift+E".action.quit.skip-confirmation = true;
           "Mod+Shift+Q".action.close-window = { };
@@ -74,6 +92,8 @@
 
           "Mod+F2".action.spawn-sh = "wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-";
           "Mod+F3".action.spawn-sh = "wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+";
+          "Mod+F4".action.spawn-sh = "sudo xbacklight -dec 1";
+          "Mod+F5".action.spawn-sh = "sudo xbacklight -inc 1";
 
           "Mod+Ctrl+H".action.set-column-width = "-5%";
           "Mod+Ctrl+L".action.set-column-width = "+5%";
@@ -111,7 +131,10 @@
             enable = false;
           };
         };
-        cursor.size = 8;
+        cursor = {
+          size = 16;
+          theme = "Adwaita";
+        };
 
         workspaces = {
           "1" = { };
@@ -128,23 +151,15 @@
         xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
 
         spawn-at-startup = [
-          { command = [ "${noctaliaExe}" ]; }
-          {
-            command = [
-              "${lib.getExe pkgs.swaybg}"
-              "-i"
-              "${config.home.homeDirectory}/.local/share/wallpaper/TahoeNight.png"
-              "-m"
-              "fill"
-            ];
-          }
+          { command = [ "${noctaliaCmd}" ]; }
+          { command = [ "background" ]; }
         ];
 
         outputs = {
           "BOE 0x0BCA Unknown".enable = false;
           "PNP(BNQ) BenQ GL2760 H3E04203019" = {
             enable = true;
-            scale = 0.7;
+            scale = 1;
             mode = {
               width = 1920;
               height = 1080;
@@ -156,7 +171,7 @@
           };
           "PNP(BNQ) BenQ GL2760 SCF04101019" = {
             enable = true;
-            scale = 0.7;
+            scale = 1;
             mode = {
               width = 1920;
               height = 1080;
