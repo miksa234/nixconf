@@ -23,7 +23,7 @@
         window-rules = [
           {
             matches = [ { app-id = "spotify"; } ];
-            open-on-workspace = "9";
+            open-on-workspace = "r9";
             open-maximized = true;
           }
           {
@@ -39,6 +39,27 @@
             open-maximized = true;
           }
         ];
+
+        workspaces = {
+          "l1" = { };
+          "l2" = { };
+          "l3" = { };
+          "l4" = { };
+          "l5" = { };
+          "l6" = { };
+          "l7" = { };
+          "l8" = { };
+          "l9" = { };
+          "r1" = { };
+          "r2" = { };
+          "r3" = { };
+          "r4" = { };
+          "r5" = { };
+          "r6" = { };
+          "r7" = { };
+          "r8" = { };
+          "r9" = { };
+        };
         binds = {
           "Mod+Return".action.spawn = "${terminalCmd}";
           "Mod+C".action.spawn = "firefox";
@@ -82,25 +103,45 @@
           "Mod+Shift+H".action.move-window-to-monitor-left = { };
           "Mod+Shift+L".action.move-window-to-monitor-right = { };
 
-          "Mod+1".action.focus-workspace = "1";
-          "Mod+2".action.focus-workspace = "2";
-          "Mod+3".action.focus-workspace = "3";
-          "Mod+4".action.focus-workspace = "4";
-          "Mod+5".action.focus-workspace = "5";
-          "Mod+6".action.focus-workspace = "6";
-          "Mod+7".action.focus-workspace = "7";
-          "Mod+8".action.focus-workspace = "8";
-          "Mod+9".action.focus-workspace = "9";
+          "Mod+1".action.focus-workspace = "l1";
+          "Mod+2".action.focus-workspace = "l2";
+          "Mod+3".action.focus-workspace = "l3";
+          "Mod+4".action.focus-workspace = "l4";
+          "Mod+5".action.focus-workspace = "l5";
+          "Mod+6".action.focus-workspace = "l6";
+          "Mod+7".action.focus-workspace = "l7";
+          "Mod+8".action.focus-workspace = "l8";
+          "Mod+9".action.focus-workspace = "l9";
 
-          "Mod+Shift+1".action.move-window-to-workspace = "1";
-          "Mod+Shift+2".action.move-window-to-workspace = "2";
-          "Mod+Shift+3".action.move-window-to-workspace = "3";
-          "Mod+Shift+4".action.move-window-to-workspace = "4";
-          "Mod+Shift+5".action.move-window-to-workspace = "5";
-          "Mod+Shift+6".action.move-window-to-workspace = "6";
-          "Mod+Shift+7".action.move-window-to-workspace = "7";
-          "Mod+Shift+8".action.move-window-to-workspace = "8";
-          "Mod+Shift+9".action.move-window-to-workspace = "9";
+          "Alt+1".action.focus-workspace = "r1";
+          "Alt+2".action.focus-workspace = "r2";
+          "Alt+3".action.focus-workspace = "r3";
+          "Alt+4".action.focus-workspace = "r4";
+          "Alt+5".action.focus-workspace = "r5";
+          "Alt+6".action.focus-workspace = "r6";
+          "Alt+7".action.focus-workspace = "r7";
+          "Alt+8".action.focus-workspace = "r8";
+          "Alt+9".action.focus-workspace = "r9";
+
+          "Mod+Shift+1".action.move-window-to-workspace = "l1";
+          "Mod+Shift+2".action.move-window-to-workspace = "l2";
+          "Mod+Shift+3".action.move-window-to-workspace = "l3";
+          "Mod+Shift+4".action.move-window-to-workspace = "l4";
+          "Mod+Shift+5".action.move-window-to-workspace = "l5";
+          "Mod+Shift+6".action.move-window-to-workspace = "l6";
+          "Mod+Shift+7".action.move-window-to-workspace = "l7";
+          "Mod+Shift+8".action.move-window-to-workspace = "l8";
+          "Mod+Shift+9".action.move-window-to-workspace = "l9";
+
+          "Alt+Shift+1".action.move-window-to-workspace = "r1";
+          "Alt+Shift+2".action.move-window-to-workspace = "r2";
+          "Alt+Shift+3".action.move-window-to-workspace = "r3";
+          "Alt+Shift+4".action.move-window-to-workspace = "r4";
+          "Alt+Shift+5".action.move-window-to-workspace = "r5";
+          "Alt+Shift+6".action.move-window-to-workspace = "r6";
+          "Alt+Shift+7".action.move-window-to-workspace = "r7";
+          "Alt+Shift+8".action.move-window-to-workspace = "r8";
+          "Alt+Shift+9".action.move-window-to-workspace = "r9";
 
           "Mod+F1".action.spawn-sh = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           "Mod+F2".action.spawn-sh = "wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-";
@@ -150,36 +191,32 @@
           theme = "Adwaita";
         };
 
-        workspaces = {
-          "1" = { };
-          "2" = { };
-          "3" = { };
-          "4" = { };
-          "5" = { };
-          "6" = { };
-          "7" = { };
-          "8" = { };
-          "9" = { };
-        };
-
         xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
 
         spawn-at-startup = [
           { command = [ "noctalia-shell" ]; }
           { command = [ "background" ]; }
           { command = [ "dunst" ]; }
-          { command = [ "niri-monitors" ]; }
-          { command = [ "nextcloud --background" ]; }
           {
             command = [
-              ''
-                swayidle -w \
-                     timeout 300 'swaylock -f -c 000000' \
-                     timeout 600 'swaymsg "output * power off"' \
-                          resume 'swaymsg "output * power on"' \
-                     timeout 900 'systemctl suspend-then-hibernate' \
-                     before-sleep 'swaylock -f -c 000000'
-              ''
+              "sh"
+              "niri-monitors"
+            ];
+          }
+          {
+            command = [
+              "nextcloud"
+              "--background"
+            ];
+          }
+          {
+            command = [
+              "swayidle -w"
+              "timeout 300 'swaylock -f -c 000000'"
+              "timeout 600 'swaymsg \"output * power off\"'"
+              "resume 'swaymsg \"output * power on\"'"
+              "timeout 900 'systemctl suspend-then-hibernate'"
+              "before-sleep 'swaylock -f -c 000000'"
             ];
           }
         ];
