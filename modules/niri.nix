@@ -63,7 +63,7 @@
         binds = {
           "Mod+Return".action.spawn = "${terminalCmd}";
           "Mod+C".action.spawn = "firefox";
-          "Mod+D".action.spawn = "dmenu-wl_run";
+          "Mod+D".action.spawn = "dmenu-niri_run";
           "Mod+P".action.spawn = "passmenu-otp";
           "Mod+B".action.spawn = "dmenu-bluetooth";
           "Mod+Alt+L".action.spawn = "swaylock -f -c 000000";
@@ -78,8 +78,8 @@
 
           "Mod+Shift+E".action.quit.skip-confirmation = true;
           "Mod+Shift+Q".action.close-window = { };
-          "Mod+G".action.maximize-column = { };
-          "Mod+F".action.fullscreen-window = { };
+          "Mod+F".action.maximize-column = { };
+          "Mod+G".action.fullscreen-window = { };
           "Mod+Shift+F".action.toggle-window-floating = { };
           "Mod+Shift+C".action.center-column = { };
 
