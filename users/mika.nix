@@ -13,7 +13,7 @@ let
   packageSets = import ../modules/packages.nix { inherit pkgs isDarwin; };
 
   link = config.lib.file.mkOutOfStoreSymlink;
-  inherit (import ../lib/dotfiles.nix) dotfiles;
+  inherit (import ../modules/dotfiles.nix) dotfiles;
   configDirs = builtins.attrNames (builtins.readDir "${dotfiles}/.config");
 in
 {
