@@ -38,13 +38,13 @@
     };
   };
 
-  virtualisation.docker = {
-    enable = true;
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
-  };
+  #  virtualisation.docker = {
+  #    enable = true;
+  #    rootless = {
+  #      enable = true;
+  #      setSocketVariable = true;
+  #    };
+  #  };
 
   # boot
   boot = {
@@ -75,7 +75,12 @@
   # netowrk
   networking.hostName = "${hostName}";
   networking.wireless.enable = true;
-  networking.firewall.enable = false;
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ ];
+    allowedUDPPorts = [ ];
+  };
 
   # time/locale
   i18n.defaultLocale = "en_US.UTF-8";
@@ -157,7 +162,7 @@
       touchpad.naturalScrolling = false;
     };
     openssh = {
-      enable = true;
+      enable = false;
       settings = {
         PasswordAuthentication = false;
         KbdInteractiveAuthentication = false;
