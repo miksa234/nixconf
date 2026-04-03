@@ -1,4 +1,4 @@
-{ pkgs , ... }:
+{ pkgs, ... }:
 {
   systemd.user = {
     startServices = "sd-switch";
@@ -30,6 +30,20 @@
       };
       Install = {
         WantedBy = [ "timers.target" ];
+      };
+    };
+    services.monitor-wakeup = {
+      Unit = {
+        Description = "Wake up external monitors after sleep/hiberanate";
+        RefuseManualStart = "no";
+        RefuseManualStop = "yes";
+      };
+      Service = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.zsh}/bin/zsh -c 'zsh .local/bin/scripts/niri-wakeup-monitors'";
+      };
+      Install = {
+        wantedBy = [ "default.target" ];
       };
     };
   };
