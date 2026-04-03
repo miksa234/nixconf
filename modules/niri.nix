@@ -19,6 +19,9 @@
       {
         prefer-no-csd = true;
         hotkey-overlay.skip-at-startup = true;
+        overview = {
+          backdrop-color = "#000000";
+        };
 
         window-rules = [
           {
@@ -109,6 +112,7 @@
 
             "Mod+Shift+H".action.move-window-to-monitor-left = { };
             "Mod+Shift+L".action.move-window-to-monitor-right = { };
+            "Mod+Tab".action.toggle-overview = { };
 
             "Mod+1".action.focus-workspace = "l1";
             "Mod+2".action.focus-workspace = "l2";
