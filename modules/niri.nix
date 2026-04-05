@@ -222,10 +222,8 @@
               "import-environment DISPLAY XDG_CURRENT_DESKTOP=niri"
             ];
           }
-
           {
             command = [
-              "zsh"
               "niri-monitors"
             ];
           }
@@ -277,7 +275,7 @@
             };
           };
           "BOE 0x0BCA Unknown" = {
-            enable = true;
+            enable = false;
             mode = {
               width = 2256;
               height = 1504;

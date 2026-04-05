@@ -40,7 +40,7 @@
       };
       Service = {
         Type = "oneshot";
-        ExecStart = "${pkgs.zsh}/bin/zsh -c 'zsh .local/bin/scripts/niri-wakeup-monitors'";
+        ExecStart = "/bin/sh -c './.local/bin/scripts/niri-wakeup-monitors'";
       };
       Install = {
         WantedBy = [ "default.target" ];
