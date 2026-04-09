@@ -32,18 +32,29 @@
         WantedBy = [ "timers.target" ];
       };
     };
-    services.monitor-wakeup = {
+    services.niri-wakeup-monitors = {
       Unit = {
-        Description = "Wake up external monitors after sleep/hiberanate";
-        RefuseManualStart = "no";
-        RefuseManualStop = "yes";
+        Description = "Wake up external monitors after resume (niri)";
+        After = [
+          "systemd-suspend.service"
+          "systemd-hibernate.service"
+          "systemd-hybrid-sleep.service"
+          "systemd-suspend-then-hibernate.service"
+        ];
       };
+
       Service = {
         Type = "oneshot";
-        ExecStart = "/bin/sh -c './.local/bin/scripts/niri-wakeup-monitors'";
+        ExecStart = "${pkgs.bash}/bin/bash -lc '%h/.local/bin/scripts/niri-wakeup-monitors'";
       };
+
       Install = {
-        WantedBy = [ "default.target" ];
+        WantedBy = [
+          "suspend.target"
+          "hibernate.target"
+          "hybrid-sleep.target"
+          "suspend-then-hibernate.target"
+        ];
       };
     };
   };

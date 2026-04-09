@@ -31,7 +31,7 @@
           }
           {
             matches = [ { app-id = "Alacritty"; } ];
-            opacity = 0.92;
+            opacity = 0.96;
           }
           {
             matches = [ { app-id = "firefox"; } ];
