@@ -26,7 +26,7 @@
         window-rules = [
           {
             matches = [ { app-id = "spotify"; } ];
-            open-on-workspace = "l9";
+            open-on-workspace = "l5";
             open-maximized = true;
           }
           {
@@ -49,19 +49,11 @@
           "l3" = { };
           "l4" = { };
           "l5" = { };
-          "l6" = { };
-          "l7" = { };
-          "l8" = { };
-          "l9" = { };
-          #"r1" = { };
-          #"r2" = { };
-          #"r3" = { };
-          #"r4" = { };
-          #"r5" = { };
-          #"r6" = { };
-          #"r7" = { };
-          #"r8" = { };
-          #"r9" = { };
+          "r1" = { };
+          "r2" = { };
+          "r3" = { };
+          "r4" = { };
+          "r5" = { };
         };
         binds =
           let
