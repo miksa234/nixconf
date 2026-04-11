@@ -86,6 +86,7 @@ with pkgs;
     gptfdisk
     qrencode
     jq
+    lazygit
   ];
 
   network = [
