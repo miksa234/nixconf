@@ -8,11 +8,13 @@ let
 in
 {
   environment.pathsToLink =
-    [ ]
-    + lib.optionals (!isDarwin) [
-      "/share/applications"
-      "/share/xdg-desktop-portal"
-    ];
+    if (!isDarwin) then
+      [
+        "/share/applications"
+        "/share/xdg-desktop-portal"
+      ]
+    else
+      [ ];
 
   home-manager = {
     useGlobalPkgs = true;

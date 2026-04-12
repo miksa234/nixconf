@@ -178,7 +178,7 @@
             enable = true;
             width = 4;
             active = {
-              color = "#A96C8A";
+              color = "#ffc87f";
             };
             inactive = {
               color = "#263238";

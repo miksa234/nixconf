@@ -10,7 +10,7 @@
       mError = "#ff6b6b";
       mOnError = "#0b0f14";
 
-      mPrimary = "#A96C8A";
+      mPrimary = "#bababa";
       mOnPrimary = "#ffffff";
 
       mSecondary = "#6CA98A";
@@ -22,7 +22,7 @@
       mSurfaceVariant = "#111827";
       mOnSurfaceVariant = "#c9d1d9";
 
-      mTertiary = "#c583d0";
+      mTertiary = "#ffc87f";
       mOnTertiary = "#07130a";
 
       mHover = "#1f2937";

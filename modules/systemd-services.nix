@@ -32,5 +32,28 @@
         WantedBy = [ "timers.target" ];
       };
     };
+    services.niri-wakeup-monitors = {
+      Unit = {
+        Description = "Wake up external monitors after resume (niri)";
+        After = [
+          "suspend.target"
+          "hibernate.target"
+          "systemd-suspend-then-hibernate.target"
+        ];
+      };
+
+      Service = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.zsh}/bin/zsh -c 'niri-wakeup-monitors'";
+      };
+
+      Install = {
+        WantedBy = [
+          "suspend.target"
+          "hibernate.target"
+          "systemd-suspend-then-hibernate.target"
+        ];
+      };
+    };
   };
 }

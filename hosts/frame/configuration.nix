@@ -4,7 +4,6 @@
   hostName,
   inputs,
   isDarwin,
-  isWayland,
   ...
 }:
 {
@@ -12,9 +11,6 @@
     ../../users/root.nix
     ../../modules/nix-settings.nix
     ../../modules/nm.nix
-  ]
-  + lib.optionals (isWayland) [
-    ../../modules/niri-resume-hook.nix
   ];
 
   sops.defaultSopsFile = ../../secrets.yaml;

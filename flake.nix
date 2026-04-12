@@ -73,6 +73,7 @@
                   hostName
                   system
                   isDarwin
+                  isWayland
                   ;
               };
               modules = [
