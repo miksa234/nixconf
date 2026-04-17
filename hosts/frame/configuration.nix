@@ -77,7 +77,7 @@
   networking.wireless.enable = true;
 
   networking.firewall = {
-    enable = true;
+    enable = false;
     allowedTCPPorts = [ ];
     allowedUDPPorts = [ ];
   };
