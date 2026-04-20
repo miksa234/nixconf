@@ -194,6 +194,7 @@ with pkgs;
     gh
     tree-sitter
     python313Packages.tiktoken
+    python313Packages.pylatexenc
     luajitPackages.jsregexp
 
     nil
