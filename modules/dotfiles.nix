@@ -8,7 +8,7 @@
   nvim-config = builtins.fetchGit {
     url = "git://popovic.xyz/config.nvim.git";
     ref = "master";
-    rev = "8179b31d351c990ba1eda277816f7c5507a6d477";
+    rev = "f12d41dd8ae96fd36d534a944606438bb649c813";
 
   };
 }
