@@ -28,7 +28,7 @@ in
 
   home = {
     username = "mika";
-    stateVersion = if isDarwin then "25.05" else "26.05";
+    stateVersion = if isDarwin then "25.11" else "26.05";
     packages = lib.flatten (
       with packageSets;
       [
@@ -78,6 +78,7 @@ in
   ]
   ++ lib.optionals (isDarwin) [
     ../modules/kitty.nix
+    ../modules/alacitty.nix
   ]
   ++ lib.optionals (!isDarwin) [
     ../modules/theme.nix

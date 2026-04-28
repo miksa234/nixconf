@@ -176,9 +176,9 @@ with pkgs;
 
   office = [
     groff
-    texliveFull
   ]
   ++ lib.optionals (!isDarwin) [
+    texliveFull
     libreoffice-fresh
   ];
 

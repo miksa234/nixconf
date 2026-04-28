@@ -160,7 +160,7 @@
     util-linux
     pstree
     wireguard-tools
-    darwin.xcode_26
+    #darwin.xcode_26
   ];
 
   services.aerospace = {
