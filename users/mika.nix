@@ -75,10 +75,7 @@ in
 
   imports = [
     ../modules/firefox.nix
-  ]
-  ++ lib.optionals (isDarwin) [
-    ../modules/kitty.nix
-    ../modules/alacitty.nix
+    (import ../modules/alacitty.nix { inherit isDarwin; })
   ]
   ++ lib.optionals (!isDarwin) [
     ../modules/theme.nix
@@ -87,7 +84,6 @@ in
   ]
   ++ lib.optionals (isWayland) [
     ../modules/niri.nix
-    ../modules/alacitty.nix
     ../modules/noctalia.nix
   ]
   ++ lib.optionals (standalone) [

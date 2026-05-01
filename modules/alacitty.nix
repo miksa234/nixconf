@@ -1,4 +1,4 @@
-{ ... }:
+{ isDarwin, ... }:
 {
   programs.alacritty = {
     enable = true;
@@ -16,18 +16,18 @@
 
       font = {
         normal = {
-          family = "Terminus";
+          family = if isDarwin then "Terminess Nerd Font" else "Terminus";
           style = "Regular";
         };
         italic = {
-          family = "Terminus";
+          family = if isDarwin then "Terminess Nerd Font" else "Terminus";
           style = "Regular";
         };
         bold_italic = {
-          family = "Terminus";
+          family = if isDarwin then "Terminess Nerd Font" else "Terminus";
           style = "Bold";
         };
-        size = 14;
+        size = if isDarwin then 18 else 14;
       };
 
       colors = {

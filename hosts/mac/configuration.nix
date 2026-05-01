@@ -235,11 +235,11 @@
         alt-shift-8 = "move-node-to-workspace 8";
         alt-shift-9 = "move-node-to-workspace 9";
 
-        alt-enter = "exec-and-forget open -n /Users/mika/Applications/kitty.app";
+        alt-enter = "exec-and-forget open -n /Users/mika/Applications/Alacritty.app";
         alt-c = "exec-and-forget open -n /Users/mika/Applications/Firefox.app";
         alt-shift-w = "exec-and-forget open -n /Users/mika/Applications/Spotify.app";
         alt-shift-q = "close --quit-if-last-window";
-        alt-m = "exec-and-forget /Users/mika/Applications/kitty.app/Contents/MacOS/kitty neomutt";
+        alt-m = "exec-and-forget /Users/mika/Applications/Alacritty.app/Contents/MacOS/alacritty neomutt";
         alt-f = "fullscreen";
 
         # Workspace navigation
