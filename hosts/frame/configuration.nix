@@ -115,12 +115,14 @@
     };
   };
   security.sudo.wheelNeedsPassword = false;
+  security.pam.services.gdm.enableGnomeKeyring = true;
 
   powerManagement.powertop.enable = true;
 
   # services
   services = {
     automatic-timezoned.enable = true;
+    avahi.enable = true;
     gvfs.enable = true;
     udisks2.enable = true;
     upower.enable = true;
@@ -153,7 +155,6 @@
   }
   // lib.optionalAttrs (!isDarwin) {
     gnome.gnome-keyring.enable = true;
-    security.pam.services.gdm.enableGnomeKeyring = true;
     libinput = {
       enable = true;
       touchpad.naturalScrolling = false;
