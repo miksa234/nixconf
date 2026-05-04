@@ -115,7 +115,7 @@
     };
   };
   security.sudo.wheelNeedsPassword = false;
-  security.pam.services.gdm.enableGnomeKeyring = true;
+  security.pam.services.sddm.enableGnomeKeyring = true;
 
   powerManagement.powertop.enable = true;
 
@@ -155,6 +155,7 @@
   }
   // lib.optionalAttrs (!isDarwin) {
     gnome.gnome-keyring.enable = true;
+
     libinput = {
       enable = true;
       touchpad.naturalScrolling = false;
