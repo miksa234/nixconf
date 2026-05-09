@@ -1,21 +1,11 @@
 { ... }:
 {
-  dendritic.modules.nixos.host-frame-packages =
+  dendritic.modules.nixos.frame-packages =
     { pkgs, ... }:
     {
       environment.systemPackages = with pkgs; [
-        vim
-        git
-        wget
-        htop
-        git-crypt
-        gnupg
-        pass
         coreutils
         util-linux
-        nix
-        curl
-        tree
         stdenv
         dbus-broker
         pciutils
@@ -26,11 +16,6 @@
         upower
         lm_sensors
         acpilight
-        ripgrep
-        fd
-        bat
-        alacritty
-        firefox
       ];
 
       fonts.packages = with pkgs; [

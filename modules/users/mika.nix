@@ -21,7 +21,7 @@
         map (resolveHomeModule dendritic profileName) profile.modules;
     in
     {
-      home.user-mika =
+      home.mika =
         args@{
           pkgs,
           lib,
@@ -105,7 +105,7 @@
           nixpkgs.config.allowUnfree = true;
         };
 
-      nixos.user-mika =
+      nixos.mika =
         { pkgs, dendritic, ... }:
         {
           users.users.mika = {
@@ -126,7 +126,7 @@
           };
         };
 
-      darwin.user-mika =
+      darwin.mika =
         { pkgs, dendritic, ... }:
         {
           users.users.mika = {

@@ -3,8 +3,8 @@
 }:
 {
   dendritic.configs.home.mika.modules = [
+    "mika"
     "nix-settings"
-    "user-mika"
     "firefox"
     "alacritty"
     "theme"

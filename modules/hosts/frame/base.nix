@@ -1,6 +1,6 @@
 { ... }:
 {
-  dendritic.modules.nixos.host-frame-base =
+  dendritic.modules.nixos.frame-base =
     {
       hostName,
       inputs,
@@ -28,7 +28,10 @@
           diskSize = 50 * 1028;
           memorySize = 16 * 1028;
           cores = 6;
-          resolution = { x = 1600; y = 900; };
+          resolution = {
+            x = 1600;
+            y = 900;
+          };
           qemu.options = [
             "-enable-kvm"
             "-cpu host"
@@ -38,31 +41,35 @@
         };
       };
 
-      boot.loader.systemd-boot.enable = true;
-      boot.loader.efi.canTouchEfiVariables = true;
-      boot.loader.timeout = 10;
-      boot.kernelPackages = pkgs.linuxPackages_latest;
-
-      networking.hostName = hostName;
-      networking.firewall.enable = true;
+      virtualisation.docker = {
+        enable = true;
+      };
 
       i18n.defaultLocale = "en_US.UTF-8";
 
-      security.sudo.wheelNeedsPassword = false;
-      security.pam.services.sddm.enableGnomeKeyring = true;
-
-      powerManagement.powertop.enable = true;
-
-      nixpkgs.config = {
-        allowUnfree = true;
-        allowBroken = true;
-        permittedInsecurePackages = [
-          "segger-jlink-qt4-772o"
-        ];
+      systemd = {
+        network.links."10-wlan0" = {
+          matchConfig.MACAddress = "14:AC:60:29:82:AB";
+          linkConfig.Name = "wlan0";
+        };
+        sleep.settings.Sleep = {
+          HibernateDelaySec = "20m";
+        };
       };
 
+      security.sudo.wheelNeedsPassword = false;
+      security.pam.services.sddm.enableGnomeKeyring = true;
+      security.rtkit.enable = true;
+      security.pam.services.swaylock = {
+        text = ''
+          auth include login
+        '';
+      };
+
+      powerManagement.powertop.enable = true;
       programs.zsh.enable = true;
 
+      nixpkgs.config.allowUnfree = true;
       nix.settings.experimental-features = [
         "nix-command"
         "flakes"

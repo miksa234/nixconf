@@ -1,6 +1,6 @@
 { ... }:
 {
-  dendritic.modules.nixos.host-frame-desktop =
+  dendritic.modules.nixos.frame-desktop =
     { ... }:
     {
       services = {

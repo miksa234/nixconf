@@ -1,10 +1,9 @@
 { ... }:
 {
-  dendritic.modules.nixos.host-frame-services =
+  dendritic.modules.nixos.frame-services =
     { ... }:
     {
       services = {
-        automatic-timezoned.enable = false;
         avahi = {
           enable = true;
           nssmdns4 = true;
@@ -13,13 +12,30 @@
             userServices = true;
           };
         };
+        openssh = {
+          enable = false;
+          ports = [ 22 ];
+          settings = {
+            PasswordAuthentication = false;
+            KbdInteractiveAuthentication = false;
+            PermitRootLogin = "no";
+            AllowUsers = [ "mika" ];
+          };
+        };
+        logind.settings.Login = {
+          SleepOperation = "suspend-then-hibernate";
+          HandlePowerKey = "suspend-then-hibernate";
+          HandleLidSwitch = "suspend-then-hibernate";
+          HandlePowerKeyLongPress = "poweroff";
+        };
+        automatic-timezoned.enable = false;
         gvfs.enable = true;
         udisks2.enable = true;
         upower.enable = true;
         fwupd.enable = true;
-        openssh.enable = true;
         tlp.enable = false;
         power-profiles-daemon.enable = true;
+        gnome.gnome-keyring.enable = true;
       };
     };
 }

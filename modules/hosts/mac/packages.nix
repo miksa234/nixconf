@@ -1,15 +1,9 @@
 { ... }:
 {
-  dendritic.modules.darwin.host-mac-packages =
+  dendritic.modules.darwin.mac-packages =
     { pkgs, ... }:
     {
       environment.systemPackages = with pkgs; [
-        neovim
-        wget
-        git
-        nix
-        curl
-        tree
         coreutils
         stdenv
         pciutils

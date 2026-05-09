@@ -1,6 +1,6 @@
 { ... }:
 {
-  dendritic.modules.nixos.hardware-server =
+  dendritic.modules.nixos.server-hardware =
     { lib, modulesPath, ... }:
     {
       imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];

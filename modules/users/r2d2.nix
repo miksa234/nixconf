@@ -1,6 +1,6 @@
 { ... }:
 {
-  dendritic.modules.home.user-r2d2 =
+  dendritic.modules.home.r2d2 =
     {
       pkgs,
       lib,

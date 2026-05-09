@@ -1,6 +1,6 @@
 { ... }:
 {
-  dendritic.modules.darwin.host-mac-aerospace =
+  dendritic.modules.darwin.aerospace =
     { ... }:
     {
       services.aerospace = {

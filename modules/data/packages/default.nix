@@ -15,7 +15,7 @@
       systemSlice = config.dendritic.data.packageSetSystem {
         inherit pkgs lib;
       };
-      desktopSlice = config.dendritic.data.packageSetLinuxDesktop {
+      desktopSlice = config.dendritic.data.packageSetDesktop {
         inherit pkgs lib suckless;
       };
       developmentSlice = config.dendritic.data.packageSetDevelopment {

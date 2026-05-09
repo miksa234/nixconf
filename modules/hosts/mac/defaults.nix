@@ -1,6 +1,6 @@
 { ... }:
 {
-  dendritic.modules.darwin.host-mac-defaults =
+  dendritic.modules.darwin.mac-defaults =
     { ... }:
     {
       system.defaults = {

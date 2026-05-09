@@ -1,6 +1,6 @@
 { ... }:
 {
-  dendritic.modules.darwin.host-mac-base =
+  dendritic.modules.darwin.mac-base =
     {
       hostName,
       inputs,

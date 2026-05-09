@@ -1,6 +1,6 @@
 { ... }:
 {
-  dendritic.modules.darwin.host-mac-homebrew =
+  dendritic.modules.darwin.homebrew =
     { ... }:
     {
       homebrew = {

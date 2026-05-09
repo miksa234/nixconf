@@ -1,6 +1,6 @@
 { ... }:
 {
-  dendritic.data.packageSetLinuxDesktop =
+  dendritic.data.packageSetDesktop =
     {
       pkgs,
       lib,
@@ -21,6 +21,7 @@
         grim
         mako
         swayidle
+        alacritty
       ];
 
       network = [

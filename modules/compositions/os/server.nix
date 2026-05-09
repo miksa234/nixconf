@@ -1,10 +1,10 @@
 { ... }:
 {
   dendritic.configs.nixos.server.modules = [
-    "hardware-server"
-    "host-server"
+    "server-base"
+    "server-hardware"
     "nix-settings"
-    "user-mika"
+    "r2d2"
     "root"
   ];
 }

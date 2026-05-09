@@ -14,6 +14,7 @@
       ];
 
       shell = [
+        gnupg
         zsh
         zsh-fast-syntax-highlighting
         zsh-system-clipboard
@@ -40,6 +41,8 @@
         qrencode
         jq
         lazygit
+        fd
+        bat
       ];
     };
 }

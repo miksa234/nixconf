@@ -1,6 +1,6 @@
 { ... }:
 {
-  dendritic.modules.nixos.host-server =
+  dendritic.modules.nixos.server-base =
     {
       hostName,
       inputs,

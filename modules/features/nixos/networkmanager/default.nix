@@ -4,6 +4,7 @@
     {
       config,
       dendritic,
+      hostName,
       ...
     }:
     {
@@ -12,6 +13,9 @@
         dendritic.modules.nixos.networkmanager-dispatcher
       ];
 
+
+      networking.hostName = hostName;
+      networking.firewall.enable = false;
       networking.networkmanager = {
         enable = true;
         ensureProfiles = {
