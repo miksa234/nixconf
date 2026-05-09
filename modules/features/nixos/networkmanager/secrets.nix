@@ -1,8 +1,16 @@
 { ... }:
 {
   dendritic.modules.nixos.networkmanager-secrets =
-    { config, ... }:
+    { inputs, config, ... }:
     {
+      imports = [
+        inputs.sops-nix.nixosModules.sops
+      ];
+
+      sops.defaultSopsFile = ./secrets.yaml;
+      sops.defaultSopsFormat = "yaml";
+      sops.age.keyFile = "/etc/sops/age/keys.txt";
+
       sops = {
         secrets = {
           "networking/gajba" = { };

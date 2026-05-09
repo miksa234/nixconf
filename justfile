@@ -13,7 +13,7 @@ hm:
     home-manager switch -b backup --flake ./#{{user}} --show-trace
 
 os:
-    sudo nixos-rebuild switch --flake ./#{{hostname}}
+    sudo nixos-rebuild switch --flake ./#{{hostname}} --show-trace
 
 os_rollback:
     sudo nixos-rebuild switch --flake --rollback

@@ -12,16 +12,10 @@
     }:
     {
       imports = [
-        inputs.sops-nix.nixosModules.sops
         inputs.home-manager.nixosModules.home-manager
-        inputs.nixos-hardware.nixosModules.framework-13-7040-amd
       ];
 
       system.stateVersion = "26.05";
-
-      sops.defaultSopsFile = ../../../secrets.yaml;
-      sops.defaultSopsFormat = "yaml";
-      sops.age.keyFile = "/home/mika/.config/sops/age/keys.txt";
 
       virtualisation.vmVariant = {
         virtualisation = {

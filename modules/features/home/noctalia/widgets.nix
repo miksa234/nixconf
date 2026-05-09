@@ -3,18 +3,19 @@
   dendritic.data.noctaliaWidgets = {
     center = [
       {
+        id = "ActiveWindow";
         hideMode = "hidden";
         maxWidth = 500;
         scrollingMode = "hover";
         showIcon = false;
         textColor = "none";
         useFixedWidth = false;
-        id = "ActiveWindow";
         fontWeight = "bold";
       }
     ];
     left = [
       {
+        id = "Workspace";
         characterCount = 2;
         colorizeIcons = false;
         emptyColor = "none";
@@ -31,7 +32,6 @@
         showBadge = true;
         showLabelsOnlyWhenOccupied = true;
         unfocusedIconsOpacity = 1;
-        id = "Workspace";
         fontWeight = "bold";
       }
     ];
@@ -42,6 +42,7 @@
       { id = "Volume"; }
       { id = "Network"; }
       {
+        id = "SystemMonitor";
         compactMode = false;
         diskPath = "/";
         iconColor = "none";
@@ -60,12 +61,11 @@
         showSwapUsage = false;
         textColor = "none";
         usePadding = false;
-        id = "SystemMonitor";
         fontWeight = "bold";
       }
       {
-        formatHorizontal = "HH:mm:ss";
         id = "Clock";
+        formatHorizontal = "HH:mm:ss";
         fontWeight = "bold";
       }
     ];
