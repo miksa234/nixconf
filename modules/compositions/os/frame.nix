@@ -9,7 +9,6 @@
     "frame-packages"
     "nix-settings"
     "networkmanager"
-    "niri-resume-hook"
     "mika"
     "root"
   ];
