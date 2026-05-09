@@ -47,6 +47,7 @@
             packages = lib.flatten (
               with packageSets;
               [
+                system
                 shell
                 cli
                 media

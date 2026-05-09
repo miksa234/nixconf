@@ -67,7 +67,20 @@
       };
 
       powerManagement.powertop.enable = true;
-      programs.zsh.enable = true;
+      programs = {
+        nix-ld.enable = true;
+        zsh.enable = true;
+        dconf.enable = true;
+        gnupg.agent = {
+          enable = true;
+          enableSSHSupport = true;
+        };
+      };
+
+      environment.variables = {
+        __ETC_ZSHRC_SOURCED = "1";
+        __ETC_ZSHENV_SOURCED = "1";
+      };
 
       nixpkgs.config.allowUnfree = true;
       nix.settings.experimental-features = [

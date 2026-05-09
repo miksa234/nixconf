@@ -25,6 +25,7 @@
       cli = [
         (pass.withExtensions (exts: [ exts.pass-otp ]))
         ripgrep
+        git
         fzf
         wget
         curl
