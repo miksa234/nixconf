@@ -33,7 +33,7 @@
         }:
         let
           link = config.lib.file.mkOutOfStoreSymlink;
-          inherit (import dendritic.data.dotfiles) configDots configNvim;
+          inherit (dendritic.data.dotfiles) configDots configNvim;
           configDirs = builtins.attrNames (builtins.readDir "${configDots}/.config");
         in
         {
@@ -62,16 +62,6 @@
 
             stateVersion = if isDarwin then "25.11" else "26.05";
 
-            xdg.configFile =
-              let
-                filteredDirs = builtins.filter (dir: dir != "systemd") configDirs;
-              in
-              lib.genAttrs filteredDirs (dir: {
-                source = link "${configDots}/.config/${dir}";
-                recursive = true;
-                force = true;
-              });
-
             file = {
               ".zshenv" = {
                 source = link "${configDots}/.zshenv";
@@ -93,6 +83,17 @@
               '';
             };
           };
+
+          xdg.configFile =
+            let
+              filteredDirs = builtins.filter (dir: dir != "systemd") configDirs;
+            in
+            lib.genAttrs filteredDirs (dir: {
+              source = link "${configDots}/.config/${dir}";
+              recursive = true;
+              force = true;
+            });
+
         }
         // lib.optionalAttrs (!isSystemManagedHome) {
           nixpkgs.config.allowUnfree = true;
@@ -115,7 +116,7 @@
           };
 
           home-manager.users.mika = {
-            homeDirectory = "/home/mika";
+            home.homeDirectory = "/home/mika";
             imports = homeProfileModules dendritic "mika";
           };
         };

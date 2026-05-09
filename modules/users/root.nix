@@ -9,9 +9,7 @@ let
       ...
     }:
     let
-      link = config.lib.file.mkOutOfStoreSymlink;
-      inherit (import dendritic.data.dotfiles) configDots configNvim;
-      configDirs = builtins.attrNames (builtins.readDir "${configDots}/.config");
+      inherit (dendritic.data.dotfiles) configDots configNvim;
     in
     {
       environment.pathsToLink = lib.optionals (!isDarwin) [
@@ -25,7 +23,7 @@ let
         backupFileExtension = "backup";
 
         users.root =
-          { ... }:
+          { config, ... }:
           {
             home = {
               username = "root";

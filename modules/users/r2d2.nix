@@ -14,7 +14,7 @@
         isDarwin = false;
       };
       link = config.lib.file.mkOutOfStoreSymlink;
-      inherit (import dendritic.data.dotfiles) configDots configNvim;
+      inherit (dendritic.data.dotfiles) configDots configNvim;
       configDirs = builtins.attrNames (builtins.readDir "${configDots}/.config");
     in
     {
