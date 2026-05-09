@@ -17,13 +17,12 @@
     in
     inputs.nixpkgs.lib.nixosSystem {
       system = cfg.system;
-      specialArgs = {
-        inherit inputs;
-        hostName = lib.attrByPath [ name ] name config.hostNames;
-        systemName = cfg.system;
-        isDarwin = false;
-        dendritic = config.dendritic;
-      };
+        specialArgs = {
+          inherit inputs;
+          hostName = lib.attrByPath [ name ] name config.hostNames;
+          systemName = cfg.system;
+          dendritic = config.dendritic;
+        };
       modules = map resolve cfg.modules;
     }
   ) config.dendritic.configs.nixos;

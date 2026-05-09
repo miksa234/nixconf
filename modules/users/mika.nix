@@ -22,29 +22,31 @@
     in
     {
       home.user-mika =
-        {
+        args@{
           pkgs,
           lib,
           dendritic,
-          isDarwin,
-          isSystemManagedHome,
           config,
           ...
         }:
         let
+          isSystemManagedHome = args.isSystemManagedHome or false;
           link = config.lib.file.mkOutOfStoreSymlink;
+          isDarwin = pkgs.stdenv.isDarwin;
+          homeDir = if isDarwin then "/Users/mika" else "/home/mika";
+          packageSets = dendritic.data.packageSets.default {
+            inherit pkgs lib;
+          };
           inherit (dendritic.data.dotfiles) configDots configNvim;
           configDirs = builtins.attrNames (builtins.readDir "${configDots}/.config");
         in
         {
           home = {
             username = "mika";
+            homeDirectory = homeDir;
             packages = lib.flatten (
-              with dendritic.data.packageSets.default {
-                inherit pkgs lib isDarwin;
-              };
+              with packageSets;
               [
-                system
                 shell
                 cli
                 media
@@ -56,7 +58,7 @@
                 email
                 development
                 wayland
-                #xorg
+                # xorg
               ]
             );
 
@@ -116,7 +118,6 @@
           };
 
           home-manager.users.mika = {
-            home.homeDirectory = "/home/mika";
             imports = homeProfileModules dendritic "mika";
           };
         };

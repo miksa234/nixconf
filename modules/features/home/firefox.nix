@@ -1,7 +1,10 @@
 { ... }:
 {
   dendritic.modules.home.firefox =
-    { inputs, isDarwin, ... }:
+    { inputs, lib, system, ... }:
+    let
+      homeDir = if lib.hasSuffix "-darwin" system then "/Users/mika" else "/home/mika";
+    in
     {
       imports = [ inputs.betterfox.homeModules.betterfox ];
 
@@ -15,7 +18,7 @@
             settings = {
               "browser.toolbars.bookmarks.visibility" = "always";
               "browser.download.start_downloads_in_tmp_dir" = false;
-              "browser.download.lastDir" = if isDarwin then "/Users/mika" else "/home/mika";
+              "browser.download.lastDir" = homeDir;
             };
           };
           mulmon = {
@@ -27,7 +30,7 @@
               "browser.toolbars.bookmarks.visibility" = "always";
               "browser.download.useDownloadDir" = true;
               "browser.download.start_downloads_in_tmp_dir" = false;
-              "browser.download.lastDir" = if isDarwin then "/Users/mika" else "/home/mika";
+              "browser.download.lastDir" = homeDir;
             };
           };
         };

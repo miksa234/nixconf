@@ -1,7 +1,10 @@
 { ... }:
 {
   dendritic.modules.home.alacritty =
-    { isDarwin, ... }:
+    { pkgs, lib, system, ... }:
+    let
+      isDarwin = pkgs.stdenv.isDarwin;
+    in
     {
       programs.alacritty = {
         enable = true;
@@ -17,21 +20,21 @@
             opacity = 0.99;
           };
 
-          font = {
-            normal = {
-              family = if isDarwin then "Terminess Nerd Font" else "Terminus";
-              style = "Regular";
+            font = {
+              normal = {
+                family = if isDarwin then "Terminess Nerd Font" else "Terminus";
+                style = "Regular";
+              };
+              italic = {
+                family = if isDarwin then "Terminess Nerd Font" else "Terminus";
+                style = "Regular";
+              };
+              bold_italic = {
+                family = if isDarwin then "Terminess Nerd Font" else "Terminus";
+                style = "Bold";
+              };
+              size = if isDarwin then 18 else 14;
             };
-            italic = {
-              family = if isDarwin then "Terminess Nerd Font" else "Terminus";
-              style = "Regular";
-            };
-            bold_italic = {
-              family = if isDarwin then "Terminess Nerd Font" else "Terminus";
-              style = "Bold";
-            };
-            size = if isDarwin then 18 else 14;
-          };
 
           colors = {
             primary = {

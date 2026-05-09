@@ -135,11 +135,6 @@
                       description = "Target system for the generated Home Manager configuration.";
                     };
 
-                    isDarwin = mkOption {
-                      type = types.bool;
-                      default = false;
-                      description = "Whether the home profile targets Darwin.";
-                    };
                   };
                 }
               );

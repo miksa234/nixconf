@@ -7,7 +7,6 @@
     {
       pkgs,
       lib,
-      isDarwin ? false,
     }:
     let
       suckless = config.dendritic.data.packageSetSuckless {
@@ -17,7 +16,7 @@
         inherit pkgs lib;
       };
       desktopSlice = config.dendritic.data.packageSetLinuxDesktop {
-        inherit pkgs lib isDarwin suckless;
+        inherit pkgs lib suckless;
       };
       developmentSlice = config.dendritic.data.packageSetDevelopment {
         inherit pkgs;

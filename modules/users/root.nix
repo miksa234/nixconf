@@ -4,12 +4,14 @@ let
     {
       dendritic,
       lib,
-      isDarwin ? false,
+      systemName,
       config,
+      pkgs,
       ...
     }:
     let
       inherit (dendritic.data.dotfiles) configDots configNvim;
+      isDarwin = pkgs.stdenv.isDarwin;
     in
     {
       environment.pathsToLink = lib.optionals (!isDarwin) [

@@ -4,9 +4,11 @@
     {
       pkgs,
       lib,
-      isDarwin ? false,
       suckless,
     }:
+    let
+      isDarwin = pkgs.stdenv.isDarwin;
+    in
     with pkgs;
     {
       wayland = [

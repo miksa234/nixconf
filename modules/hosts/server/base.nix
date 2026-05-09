@@ -1,7 +1,15 @@
 { ... }:
 {
   dendritic.modules.nixos.host-server =
-    { hostName, inputs, lib, pkgs, ... }:
+    {
+      hostName,
+      inputs,
+      lib,
+      pkgs,
+      dendritic,
+      systemName,
+      ...
+    }:
     {
       imports = [
         inputs.home-manager.nixosModules.home-manager
@@ -49,5 +57,16 @@
       ];
 
       systemd.services.sshd.wantedBy = lib.mkDefault [ "multi-user.target" ];
+
+      home-manager.extraSpecialArgs = {
+        inherit
+          dendritic
+          hostName
+          inputs
+          systemName
+          ;
+        system = systemName;
+        isSystemManagedHome = true;
+      };
     };
 }

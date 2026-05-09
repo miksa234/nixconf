@@ -29,7 +29,6 @@
               inherit inputs;
               hostName = lib.attrByPath [ name ] name config.hostNames;
               systemName = cfg.system;
-              isDarwin = false;
               dendritic = config.dendritic;
             };
             modules = map resolve cfg.modules;

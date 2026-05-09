@@ -25,7 +25,6 @@
         extraSpecialArgs = {
           inherit system;
           hostName = lib.attrByPath [ name ] name config.hostNames;
-          isDarwin = cfg.isDarwin;
           isSystemManagedHome = false;
           inherit inputs;
           dendritic = config.dendritic;

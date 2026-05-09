@@ -1,8 +1,8 @@
 { ... }:
 {
   dendritic.modules.home.theme =
-    { pkgs, lib, isDarwin, ... }:
-    lib.mkIf (!isDarwin) {
+    { pkgs, lib, system, ... }:
+    lib.mkIf (!(lib.hasSuffix "-darwin" system)) {
       dconf.settings."org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
         gtk-theme = "Adwaita-dark";

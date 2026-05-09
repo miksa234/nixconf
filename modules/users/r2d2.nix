@@ -11,7 +11,6 @@
     let
       packageSets = dendritic.data.packageSets.default {
         inherit pkgs lib;
-        isDarwin = false;
       };
       link = config.lib.file.mkOutOfStoreSymlink;
       inherit (dendritic.data.dotfiles) configDots configNvim;
@@ -25,18 +24,16 @@
 
       };
 
-      home.packages =
-        (
-          with packageSets;
-          lib.flatten [
-            system
-            shell
-            cli
-            network
-            development
-          ]
-        )
-        ++ [ pkgs.lf ];
+      home.packages = lib.flatten (
+        with packageSets;
+        [
+          shell
+          cli
+          network
+          development
+        ]
+        ++ [ pkgs.lf ]
+      );
 
       home.xdg.configFile =
         let

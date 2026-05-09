@@ -74,7 +74,7 @@
           inputs
           systemName
           ;
-        isDarwin = false;
+        system = systemName;
         isSystemManagedHome = true;
       };
     };

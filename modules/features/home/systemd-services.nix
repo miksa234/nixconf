@@ -1,8 +1,8 @@
 { ... }:
 {
   dendritic.modules.home.systemd-services =
-    { pkgs, lib, isDarwin, ... }:
-    lib.mkIf (!isDarwin) {
+    { pkgs, lib, system, ... }:
+    lib.mkIf (!(lib.hasSuffix "-darwin" system)) {
       systemd.user = {
         startServices = "sd-switch";
         services.mbsync = {

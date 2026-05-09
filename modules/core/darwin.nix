@@ -20,7 +20,6 @@
         system = cfg.system;
         specialArgs = {
           inherit inputs;
-          isDarwin = true;
           hostName = lib.attrByPath [ name ] name config.hostNames;
           systemName = cfg.system;
           dendritic = config.dendritic;
