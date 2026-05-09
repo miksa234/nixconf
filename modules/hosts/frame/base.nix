@@ -7,6 +7,7 @@
       systemName,
       dendritic,
       lib,
+      pkgs,
       ...
     }:
     {
@@ -40,6 +41,7 @@
       boot.loader.systemd-boot.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;
       boot.loader.timeout = 10;
+      boot.kernelPackages = pkgs.linuxPackages_latest;
 
       networking.hostName = hostName;
       networking.firewall.enable = true;

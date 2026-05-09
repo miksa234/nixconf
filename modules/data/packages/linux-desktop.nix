@@ -26,6 +26,7 @@
       network = [
         whois
         nmap
+        dconf
         wireguard-tools
         localsend
       ]

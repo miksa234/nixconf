@@ -88,7 +88,11 @@
 
           xdg.configFile =
             let
-              filteredDirs = builtins.filter (dir: dir != "systemd") configDirs;
+              excludedDirs = [
+                "systemd"
+                "nix"
+              ];
+              filteredDirs = builtins.filter (dir: !(builtins.elem dir excludedDirs)) configDirs;
             in
             lib.genAttrs filteredDirs (dir: {
               source = link "${configDots}/.config/${dir}";
