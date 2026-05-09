@@ -23,12 +23,6 @@
       description = "Optional domain suffix for hosts";
     };
 
-    isWayland = lib.mkOption {
-      type = lib.types.bool;
-      default = builtins.getEnv "IS_WAYLAND" == "1";
-      description = "Whether to use Wayland (set via IS_WAYLAND env var at build time)";
-    };
-
     linuxSystem = lib.mkOption {
       type = lib.types.str;
       default = "x86_64-linux";

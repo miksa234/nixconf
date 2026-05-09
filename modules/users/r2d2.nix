@@ -5,6 +5,7 @@
       pkgs,
       lib,
       dendritic,
+      config,
       ...
     }:
     let
@@ -12,12 +13,16 @@
         inherit pkgs lib;
         isDarwin = false;
       };
+      link = config.lib.file.mkOutOfStoreSymlink;
+      inherit (import dendritic.data.dotfiles) configDots configNvim;
+      configDirs = builtins.attrNames (builtins.readDir "${configDots}/.config");
     in
     {
       home = {
         username = "r2d2";
         homeDirectory = "/home/r2d2";
         stateVersion = "25.11";
+
       };
 
       home.packages =
@@ -33,9 +38,35 @@
         )
         ++ [ pkgs.lf ];
 
-      home.file.".config/nix-zsh-plugins.zsh".text = ''
-        source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-        source ${pkgs.zsh-system-clipboard}/share/zsh/zsh-system-clipboard/zsh-system-clipboard.zsh
-      '';
+      home.xdg.configFile =
+        let
+          filteredDirs = builtins.filter (dir: dir != "systemd") configDirs;
+        in
+        lib.genAttrs filteredDirs (dir: {
+          source = link "${configDots}/.config/${dir}";
+          recursive = true;
+          force = true;
+        });
+
+      home.file = {
+        ".zshenv" = {
+          source = link "${configDots}/.zshenv";
+          force = true;
+        };
+        ".local" = {
+          source = link "${configDots}/.local";
+          recursive = true;
+          force = true;
+        };
+        ".config/nvim" = {
+          source = link "${configNvim}";
+          recursive = true;
+          force = true;
+        };
+        ".config/nix-zsh-plugins.zsh".text = ''
+          source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+          source ${pkgs.zsh-system-clipboard}/share/zsh/zsh-system-clipboard/zsh-system-clipboard.zsh
+        '';
+      };
     };
 }

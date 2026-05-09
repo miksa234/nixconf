@@ -27,47 +27,72 @@
           lib,
           dendritic,
           isDarwin,
-          isWayland,
           isSystemManagedHome,
+          config,
           ...
         }:
         let
-          packageSets = dendritic.data.packageSets.default {
-            inherit pkgs lib isDarwin;
-          };
+          link = config.lib.file.mkOutOfStoreSymlink;
+          inherit (import dendritic.data.dotfiles) configDots configNvim;
+          configDirs = builtins.attrNames (builtins.readDir "${configDots}/.config");
         in
         {
-          home =
-            {
-              username = "mika";
-              stateVersion = if isDarwin then "25.11" else "26.05";
-              packages = lib.flatten (
-                with packageSets;
-                [
-                  system
-                  shell
-                  cli
-                  media
-                  fileManagement
-                  communication
-                  network
-                  office
-                  fonts
-                  email
-                  development
-                ]
-                ++ lib.optionals (!isDarwin && !isWayland) [ xorg ]
-                ++ lib.optionals isWayland [ wayland ]
-              );
+          home = {
+            username = "mika";
+            packages = lib.flatten (
+              with dendritic.data.packageSets.default {
+                inherit pkgs lib isDarwin;
+              };
+              [
+                system
+                shell
+                cli
+                media
+                fileManagement
+                communication
+                network
+                office
+                fonts
+                email
+                development
+                wayland
+                #xorg
+              ]
+            );
 
-              file.".config/nix-zsh-plugins.zsh".text = ''
+            stateVersion = if isDarwin then "25.11" else "26.05";
+
+            xdg.configFile =
+              let
+                filteredDirs = builtins.filter (dir: dir != "systemd") configDirs;
+              in
+              lib.genAttrs filteredDirs (dir: {
+                source = link "${configDots}/.config/${dir}";
+                recursive = true;
+                force = true;
+              });
+
+            file = {
+              ".zshenv" = {
+                source = link "${configDots}/.zshenv";
+                force = true;
+              };
+              ".local" = {
+                source = link "${configDots}/.local";
+                recursive = true;
+                force = true;
+              };
+              ".config/nvim" = {
+                source = link "${configNvim}";
+                recursive = true;
+                force = true;
+              };
+              ".config/nix-zsh-plugins.zsh".text = ''
                 source ${pkgs.zsh-fast-syntax-highlighting}/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
                 source ${pkgs.zsh-system-clipboard}/share/zsh/zsh-system-clipboard/zsh-system-clipboard.zsh
               '';
-            }
-            // lib.optionalAttrs (!isDarwin) {
-              homeDirectory = "/home/mika";
             };
+          };
         }
         // lib.optionalAttrs (!isSystemManagedHome) {
           nixpkgs.config.allowUnfree = true;
@@ -90,6 +115,7 @@
           };
 
           home-manager.users.mika = {
+            homeDirectory = "/home/mika";
             imports = homeProfileModules dendritic "mika";
           };
         };

@@ -5,16 +5,15 @@
       lib,
       inputs,
       pkgs,
-      isWayland,
       dendritic,
       ...
     }:
     {
-      imports = lib.optionals isWayland [
+      imports = [
         inputs.niri.homeModules.niri
       ];
 
-      config = lib.mkIf isWayland {
+      config = {
         programs.niri = {
           enable = true;
           settings = {

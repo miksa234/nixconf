@@ -5,7 +5,6 @@
       hostName,
       inputs,
       systemName,
-      isWayland,
       dendritic,
       lib,
       ...
@@ -73,7 +72,6 @@
           dendritic
           hostName
           inputs
-          isWayland
           systemName
           ;
         isDarwin = false;

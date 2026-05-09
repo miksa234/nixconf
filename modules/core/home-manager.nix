@@ -26,7 +26,6 @@
           inherit system;
           hostName = lib.attrByPath [ name ] name config.hostNames;
           isDarwin = cfg.isDarwin;
-          isWayland = config.isWayland;
           isSystemManagedHome = false;
           inherit inputs;
           dendritic = config.dendritic;

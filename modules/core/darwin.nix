@@ -23,7 +23,6 @@
           isDarwin = true;
           hostName = lib.attrByPath [ name ] name config.hostNames;
           systemName = cfg.system;
-          isWayland = config.isWayland;
           dendritic = config.dendritic;
         };
         modules = map resolve cfg.modules;

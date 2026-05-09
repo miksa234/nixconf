@@ -1,25 +1,26 @@
 { ... }:
 {
   dendritic.modules.home.noctalia =
-    { inputs, lib, isWayland, dendritic, ... }:
     {
-      imports = lib.optionals isWayland [
+      inputs,
+      lib,
+      dendritic,
+      ...
+    }:
+    {
+      imports = [
         inputs.noctalia.homeModules.default
       ];
 
-      config = lib.mkIf isWayland {
+      config = {
         programs.noctalia-shell = {
           enable = true;
           colors = dendritic.data.noctaliaColors;
-          settings =
-            dendritic.data.noctaliaSettings
-            // {
-              bar =
-                dendritic.data.noctaliaBar
-                // {
-                  widgets = dendritic.data.noctaliaWidgets;
-                };
+          settings = dendritic.data.noctaliaSettings // {
+            bar = dendritic.data.noctaliaBar // {
+              widgets = dendritic.data.noctaliaWidgets;
             };
+          };
         };
       };
     };
