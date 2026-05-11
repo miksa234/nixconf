@@ -10,7 +10,7 @@
     configNvim = builtins.fetchGit {
       url = "https://github.com/miksa234/config.nvim.git";
       ref = "main";
-      rev = "c5060f64211f8138584cb46d2319d28c41f85f4a";
+      rev = "33ffbd748906323f53eef2af856c68474446c073";
     };
   };
 }

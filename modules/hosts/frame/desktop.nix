@@ -29,7 +29,11 @@
 
       services.libinput = {
         enable = true;
-        touchpad.naturalScrolling = false;
+        touchpad = {
+          naturalScrolling = false;
+          tapping = true;
+          clickMethod = "clickfinger";
+        };
       };
     };
 }
