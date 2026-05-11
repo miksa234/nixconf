@@ -6,6 +6,7 @@
       inputs,
       lib,
       modulesPath,
+      pkgs,
       ...
     }:
     {
@@ -40,7 +41,10 @@
       nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
       hardware.enableAllFirmware = true;
       hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-      hardware.bluetooth.enable = true;
+      hardware.bluetooth = {
+        enable = true;
+        package = inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.bluez;
+      };
       hardware.sensor.iio.enable = false;
     };
 }
